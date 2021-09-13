@@ -13,17 +13,17 @@ The below figure provides the detection and recovery specifications for a method
 <img width="518" alt="Screen Shot 2021-09-13 at 4 05 21 PM" src="https://user-images.githubusercontent.com/1769347/133073092-922b6784-930c-47af-96c2-a9564b4c2b35.png">
 
   
-# How to use jml4Sec?
+# How to use JML4Sec?
 
 The JML4Sec can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the SecRuntime Monitor is primarily designed to aid programmers in writing safe E-Commerce system. 
 
-4.2.1.	Command Line Version
+Command Line Version
 1.	Encode security properties in Java classes by following the mentioned syntax
 2.	Run the Jar file of the JML4Sec, i.e. java -jar JML4Sec.jar path-to-project
 3.	Step 2 will instrument the code with necessary assertions and code.
 4.	Enable JVM assertion before executing E-commerce application - https://tutoringcenter.cs.usfca.edu/resources/enabling-assertions-in-eclipse.html
   
-4.2.2.	Through Eclipse IDE (preferred)
+Through Eclipse IDE (preferred)
 1.	Encode security properties in Java classes by following the mentioned syntax
 2.	Import the JML4Sec.jar.jar file in your project
 3.	Call the function SRM.instrumentCode(“path-to-file”) in the main function of your project to instrument the code. The SRM is a static class.
