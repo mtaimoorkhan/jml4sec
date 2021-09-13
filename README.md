@@ -13,10 +13,6 @@ The below figure provides the detection and recovery specifications for a method
 <img width="518" alt="Screen Shot 2021-09-13 at 4 05 21 PM" src="https://user-images.githubusercontent.com/1769347/133073092-922b6784-930c-47af-96c2-a9564b4c2b35.png">
 
   
-
-![image](https://user-images.githubusercontent.com/1769347/133073238-a39788ab-5798-4f53-bff1-4022dfb94445.png)
-
-
 # How to use jml4Sec?
 
 The JML4Sec can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the SecRuntime Monitor is primarily designed to aid programmers in writing safe E-Commerce system. 
