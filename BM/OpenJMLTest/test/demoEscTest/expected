@@ -1,0 +1,33 @@
+Proving methods in loops.EscTest
+Starting proof of loops.EscTest.EscTest() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.EscTest() with prover !!!! - no warnings
+Starting proof of loops.EscTest.incr(int) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.incr(int) with prover !!!! - no warnings
+Starting proof of loops.EscTest.zero_array(int[]) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.zero_array(int[]) with prover !!!! - no warnings
+Starting proof of loops.EscTest.all_zero(int[]) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.all_zero(int[]) with prover !!!! - no warnings
+Starting proof of loops.EscTest.zero_matrix(int[][]) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - after explicit assume statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.zero_matrix(int[][]) with prover !!!! - no warnings
+Starting proof of loops.EscTest.zero_matrix_2(int[][]) with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at reachable statement : OK
+Feasibility check - at program exit : OK
+Completed proof of loops.EscTest.zero_matrix_2(int[][]) with prover !!!! - no warnings
+Completed proving methods in loops.EscTest

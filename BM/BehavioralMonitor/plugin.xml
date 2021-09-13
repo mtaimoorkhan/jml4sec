@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="GAPplugin.GAPCompUnit"
+            objectClass="org.eclipse.jdt.core.ICompilationUnit">
+         <menu
+               id="GAPplugin.menu.GAPCompUnit"
+               label="EnsureSec">
+            <separator
+                  name="GAPplugin.separator.GAPCompUnit">
+            </separator>
+         </menu>
+        
+         <action
+               class="greenwich.ensuresec.plugin.GAPIFileAction"
+               id="EVMDD_SMC_ModelGenerator.action.Concurrency.Test"
+               label="Generate Assertions"
+               menubarPath="GAPplugin.menu.GAPCompUnit/GAPplugin.separator.GAPCompUnit">
+         </action>
+        
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="GAPplugin.GAPPackage"
+            objectClass="org.eclipse.jdt.core.IPackageFragment">
+         <menu
+               id="GAPplugin.menu.GAPPackage"
+               label="EnsureSec">
+            <separator
+                  name="GAPplugin.separator.GAPPackage">
+            </separator>
+         </menu>
+        
+         <action
+               class="greenwich.ensuresec.plugin.GAPIFileAction"
+               id="EVMDD_SMC_ModelGenerator.action.Concurrency.Test"
+               label="Generate Assertions"
+               menubarPath="GAPplugin.menu.GAPPackage/GAPplugin.separator.GAPPackage">
+         </action>
+       
+      </objectContribution>
+    
+   </extension>
+
+</plugin>

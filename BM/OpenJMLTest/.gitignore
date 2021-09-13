@@ -1,0 +1,10 @@
+/bin/
+/temp-release/
+/benchmarks/
+/testdata/
+/openjml.properties
+/junit/
+*.bpl
+**/*actual*
+**/*.class
+/strongarm-error.log

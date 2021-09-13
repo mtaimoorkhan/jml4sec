@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="org/jmlspecs/unfinished/**" kind="src" path="src-runtime"/>
+	<classpathentry excluding="org/jmlspecs/openjml/jmldoc/" kind="src" path="src-openjml"/>
+	<classpathentry kind="src" path="src-annotation"/>
+	<classpathentry kind="src" path="src-openjdk"/>
+	<classpathentry exported="true" kind="lib" path="gson-2.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jpaul-2.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jSMTLIB.jar" sourcepath="/SMT/src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="bin" sourcepath="bin"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/JMLAnnotations"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="/OpenJML/otherlibs/jpaul-2.5.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/OpenJML/otherlibs/gson-2.8.1.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OpenJDK"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OpenJML"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OpenJMLTest"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Specs"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

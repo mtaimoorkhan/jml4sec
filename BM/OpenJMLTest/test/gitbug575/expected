@@ -1,0 +1,28 @@
+Proving methods in TestJava
+Starting proof of TestJava.TestJava() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of TestJava.TestJava() with prover !!!! - no warnings
+Starting proof of TestJava.m() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - at program exit : OK
+Completed proof of TestJava.m() with prover !!!! - no warnings
+Starting proof of TestJava.mm() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of TestJava.mm() with prover !!!! - no warnings
+Starting proof of TestJava.q() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - before explicit assert statement : OK
+Feasibility check - at program exit : OK
+Completed proof of TestJava.q() with prover !!!! - no warnings
+Starting proof of TestJava.qq() with prover !!!!
+Feasibility check - end of preconditions : OK
+Feasibility check - at program exit : OK
+Completed proof of TestJava.qq() with prover !!!! - no warnings
+Completed proving methods in TestJava

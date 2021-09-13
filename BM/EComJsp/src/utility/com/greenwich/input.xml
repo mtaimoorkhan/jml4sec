@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+    <person>
+        <firstName>Frank</firstName>
+        <lastName>Erb</lastName>
+        <access>true</access>
+        <images>
+            <img>hm001.jpg</img>
+        </images>
+    </person>
+    <person>
+        <firstName>Hans</firstName>
+        <lastName>Mustermann</lastName>
+        <access>true</access>
+        <images>
+            <img>hm001.jpg</img>
+        </images>
+    </person>
+    <person>
+        <firstName>Thomas</firstName>
+        <lastName>Tester</lastName>
+        <access>false</access>
+        <images>
+            <img>tt001.jpg</img>
+        </images>
+    </person>
+</people>

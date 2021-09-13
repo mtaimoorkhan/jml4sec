@@ -1,0 +1,57 @@
+sql injection: ad' OR '1=1
+BlindSQLi: Kumar' AND title='1
+UnionAttack= 1001 UNION select id,title, author, price, qty from order_to_vendors where id=1001
+
+SecRuntimeMonitor: Securing web based E-commerce application from SQL injection through automatically generated assertions 
+
+
+
+[1:39 PM] Muhammad Taimoor Khan
+    
+https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/262311
+​[1:41 PM] Muhammad Taimoor Khan
+    
+http://www-sop.inria.fr/oasis/SAFA/slides2007/SAFA-dec07-Huisman.pdf
+​[1:41 PM] Muhammad Taimoor Khan
+    
+https://link.springer.com/chapter/10.1007/1-4020-8147-2_1
+Enforcing High-Level Security Properties for AppletsSmart card applications often handle privacy-sensitive information, and therefore must obey certain security policies. Typically, such policies are described as high-level security properties,...link.springer.com​[1:41 PM] Muhammad Taimoor Khan
+    
+https://scholarworks.utep.edu/cgi/viewcontent.cgi?article=1163&context=cs_techrep
+​[1:49 PM] Muhammad Taimoor Khan
+    
+https://checkerframework.org
+
+
+
+   /*@ normal_behavior
+	  requires i >= 0; 
+	  assignable j; 
+	  ensures j == i; 
+also
+compromised_behavior
+	  requires "i >1"; 
+	  ensures "x < 5";
+	  alarms "IsSQLiORAttack(password) < 1 ==> SQLINJECTION"; 
+	  alarms "IsDateValid(date) < 1 ==> DateError";
+	  alarms "IsAllowedUrl(url) < 1 ==> MalciousUrl";
+	  alarms "IsFilePathOK(path)< 1 ==> MalciousFilePath"; 
+	  alarms "IsRequestFromValidUser(request, session) < 1 ==>InvalidUser";
+	  alarms "IsDataValidForUnmashalling(str) < 1 ==>MarshallingError";
+	  noException "true";
+also action_behavior
+	 log "IsSQLiORAttack(password) < 1 ==> message(Inj, a.txt)";	
+	 logout "IsSQLiORAttack(password) < 1 ==> invalidate(Session)";
+	 redirect "IsSQLiORAttack(password) < 1 ==> redirect(httpReq, www.google.com)";
+	 notify "IsSQLiORAttack(password) < 1 ==> email(Inj, a@hotmail.com)";	
+	 
+*/
+
+    /*@ requires myJml.IsSessionAttributeEncrypted(session)==true &&
+ * 			 myJml.usedPort(request.getServerPort()==8080)  &&
+ * 			 myJml.IsHeaderCorrupted(request.getHeaders(xxx)==false)&&
+ * 			 myJml.IsRequestParamterValid(request.getParameter(key), key)&&
+ * 			 controlSequence==2;       
+  @ ensures  myJml.IsSessionAttributeEncrypted(session)==true &&
+  			controlSequence==3;
+@*/
