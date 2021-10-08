@@ -1,1 +1,2 @@
-This is a saample readme
+# Software Recovery Engine
+Jml4Sec consists of two main modules : (a) Behavioural Detection Monitor (b) Behavioural Recovery Monitor. The former detects cyber attacks, particularly attacks through SQLi and HTTP Servlets objects whereas the later provides mechanism to recover from the occured cyber attack. Bascially the programmer is supposed to specify the detection and recovery actions through extended JML specifications.  The syntax of the extended JML specifications is provided in below figure.
