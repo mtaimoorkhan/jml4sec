@@ -2,7 +2,7 @@
 
 The RSM is a specification-based security behavioral monitor. The user of RSM is supposed to add JML styled security specifications into Java classes. The RSM generates assertions and guards (if statement) to avoid cyber-attacks as shown in below diagram. The main features of RSM are listed below:
 
-<h4> Avoiding Attacks through SQL Injection: <h4>
+<h4> Avoiding Attacks through SQL Injection: </h4>
 The programmer may add necessary security specifications to avoid different types of SQL injections attacks, notably In-Band SQLi, Error-Based SQLi and Inferential SQLi attacks. The presence of these types of attacks may corrupt the database, violate database integrity and
 allow unauthorized access to database.
 
