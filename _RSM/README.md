@@ -8,9 +8,11 @@ RSM is an inline monitor that takes JML annotated Java programs as an input, aut
 <h4> Used Specification Language: </h4>
 The RSM uses the extended JML specifications to annotate the security properties of Java programs written to develop an e-commerce application.  The syntax of the provided specifications is given in below figure. The @normal_behavior annotation is used to specify the basic sanitary checks. In contrast, the @compromised_behavior is an extended annotation that can determine a system behaviour against the defined cyber-attack classes.
 
+<img width="500" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136647147-cc6c5610-6158-4d37-a8cc-912c756cab86.png">
+
 The requires clause of compromised_behavior specification consists of two parts: (a) the left side of -> symbol defines the Boolean expression (condition) represented through jml-spec-expr whereas the right side defines the attack. Similarly, other clauses can be interpreted. The basic difference between requires and alarms clauses is the generated code. Indeed, the Runtime Security Monitor only generates assertions against the requires clause. In contrast, the alarms clause also generates code to document the ongoing attack and the available metadata such as failed condition, module (method) name and time of the attack, etc.  
 
-<img width="500" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136647147-cc6c5610-6158-4d37-a8cc-912c756cab86.png">
+
 
 
 
