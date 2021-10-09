@@ -3,8 +3,11 @@ RSM is an inline monitor that takes JML annotated Java programs as an input, aut
 
 <img width="681" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136646721-6694d4b6-12d5-4fd6-867f-ace2b6af0bb5.png">
 
+<h4> Used Specification Language: </h4>
+The RSM uses the extended JML specifications to annotate the security properties of Java programs written to develop an e-commerce application.  The syntax of the provided specifications is given in below figure.
 
-![image](https://user-images.githubusercontent.com/1769347/136646441-87b2b4d6-007f-4b80-a61a-905937d783c2.png)
+![image](https://user-images.githubusercontent.com/1769347/136647085-35c7471f-8146-486b-8beb-7e40f2b23b92.png)
+
 
 
 
