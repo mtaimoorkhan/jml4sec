@@ -1,6 +1,11 @@
 # RSM (Runtime Security Monitor)
 
-The RSM is a specification-based security behavioral monitor. The user of RSM is supposed to add JML styled security specifications into Java classes. The RSM generates assertions and guards (if statement) to avoid cyber-attacks as shown in below diagram. The main features of RSM are listed below:
+The RSM is a specification-based security behavioral monitor as shown in below figure. The user of RSM is supposed to add JML styled security specifications into Java classes. The RSM generates assertions and guards (if statement) to avoid cyber-attacks and logs the attacks details in an XML file. 
+
+<img width="550" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136646721-6694d4b6-12d5-4fd6-867f-ace2b6af0bb5.png">
+
+
+The main features of RSM are listed below:
 
 <h4> Avoiding Attacks through SQL Injection: </h4>
 The programmer may add necessary security specifications to avoid different types of SQL injections attacks, notably In-Band SQLi, Error-Based SQLi and Inferential SQLi attacks. The presence of these types of attacks may corrupt the database, violate database integrity and
@@ -25,7 +30,7 @@ The RSM does not allow to occur above-described attacks, however it logs the att
 
 
 
-<img width="550" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136646721-6694d4b6-12d5-4fd6-867f-ace2b6af0bb5.png">
+
 
 
 <h2> Used Specification Language: </h2>
@@ -44,17 +49,17 @@ The below Figure presents the extended JML specifications for IsLogin (...) meth
 
 <h2> How to use RSM? </h2>
 
-The JML4Sec can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the SecRuntime Monitor is primarily designed to aid programmers in writing safe E-Commerce system. 
+The RSM can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the RSM is primarily designed to aid programmers in writing safe E-Commerce system. 
 
 Command Line Version
 1.	Encode security properties in Java classes by following the mentioned syntax
-2.	Run the Jar file of the JML4Sec, i.e. java -jar JML4Sec.jar path-to-project
+2.	Run the Jar file of the JML4Sec, i.e. java -jar RSM.jar path-to-project
 3.	Step 2 will instrument the code with necessary assertions and code.
 4.	Enable JVM assertion before executing E-commerce application - https://tutoringcenter.cs.usfca.edu/resources/enabling-assertions-in-eclipse.html
   
 Through Eclipse IDE (preferred)
 1.	Encode security properties in Java classes by following the mentioned syntax
-2.	Import the JML4Sec.jar.jar file in your project
+2.	Import the RSM.jar file in your project
 3.	Call the function SRM.instrumentCode(“path-to-file”) in the main function of your project to instrument the code. The SRM is a static class.
 4.	Execute the main function
 5.	Step 4 will instrument the code with necessary assertions and code.
