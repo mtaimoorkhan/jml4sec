@@ -23,7 +23,7 @@ The key features of SRE are listed below:
 
 The SRE uses the extended JML specifications to annotate the security and recovery properties of Java programs as shown in below Figure. The @normal_behavior annotation is used to specify the basic sanitary checks, @compromised_behavior is used to specify attack detection and @action_behavior is used to specify the recovery (action).  
 
-<img width="500" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136649597-6a36ec03-0469-4afc-a193-ebe5f022401f.png">
+<img width="400" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136649597-6a36ec03-0469-4afc-a193-ebe5f022401f.png">
 
 <h2> A Working Example</h2>
 
