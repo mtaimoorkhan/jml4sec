@@ -1,5 +1,28 @@
 # RSM (Runtime Security Monitor)
-RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments as shown in the below block diagram. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. The RSM logs the detected attacks in an XML file.
+
+The RSM is a specification-based security behavioral monitor. The user of RSM is supposed to add JML styled security specifications into Java classes. The RSM generates assertions and guards (if statement) to avoid cyber-attacks as shown in below diagram. The main features of RSM are listed below:
+
+<h4> Avoiding Attacks through SQL Injection: <h4>
+The programmer may add necessary security specifications to avoid different types of SQL injections attacks, notably In-Band SQLi, Error-Based SQLi and Inferential SQLi attacks. The presence of these types of attacks may corrupt the database, violate database integrity and
+allow unauthorized access to database.
+
+
+<h4> Avoiding Attacks through HTTPServlet Objects: </h4>
+HTTPServlet Objects are widely used to encode a web-based e-commerce application. Attackers may launch an attack through these objects by initiating a communication through unauthorised port and from an unauthorized IP address. RSM provides a way to avoid these types of attacks through automatically generated assertions.
+
+<h4> Avoiding Buffer Overflow: </h4>
+RSM provides a way to handle buffer overflow attacks, initiated through a user input. The programmer may add necessary specifications to avoid overflowing a memory buffer by specifying the value ranges.  .
+
+<h4> Altering Control Flow: </h4>
+Attackers may launch an attack by altering the execution flow (method control flow) of an object. RSM provides a way to encode control-flow information in a method specification, hence provides a sound deterrence against control flow attacks.
+
+<h4> Perform Sanity Checks: </h4>
+The RSM performs different types of sanity checks such as to check object nullness, to ensure the range of integer values and to validate the legality of Date object. Furthermore, these sanity checks can be elegantly designed to properly unmarshall an object in Java.
+
+<h4> Log Attacks Details: </h4>
+The RSM does not allow to occur above-described attacks, however it logs the attack-attempts in an XML file. This XML file can be used by other ENSURESEC tools to audit and recovery.  
+
+
 
 
 <img width="550" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136646721-6694d4b6-12d5-4fd6-867f-ace2b6af0bb5.png">
