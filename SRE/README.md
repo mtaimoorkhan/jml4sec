@@ -1,10 +1,7 @@
 # SRE (Software Recovery Engine)
 The SRE proposes a specification-based approach to recover from the cyber-attacks as shown in below figure. The SRE works in collusion with RSM (Runtime Security Monitor). The SRE defines three approaches to recover from cyber-attacks: (a) Full Recovery (b) Partial Recovery (c) No Recovery. The first approach presents specifications to encode full recovery from the attacks, whereas the second approach provides partial recovery. The third approach provides no recovery to the occurred attack(s). 
 
-
-![image](https://user-images.githubusercontent.com/1769347/136649360-1201952a-9269-422e-b9c8-a24a162c83dd.png)
-
-
+<img width="733" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136649360-1201952a-9269-422e-b9c8-a24a162c83dd.png">
 
 The key features of SRE are listed below:
 
