@@ -1,5 +1,7 @@
 # RSM (Runtime Security Monitor)
-RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments, and logs the detected threats as shown in the below block diagram of Figure 1. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. ![image](https://user-images.githubusercontent.com/1769347/136646441-87b2b4d6-007f-4b80-a61a-905937d783c2.png)
+RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments, and logs the detected threats as shown in the below block diagram of Figure 1. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. The RSM logs the detected attacks in an XML file.
+
+![image](https://user-images.githubusercontent.com/1769347/136646441-87b2b4d6-007f-4b80-a61a-905937d783c2.png)
 
 
 
