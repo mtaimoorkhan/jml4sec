@@ -5,7 +5,7 @@ The SRE proposes a specification-based approach to recover from the cyber-attack
 
 The key features of SRE are listed below:
 
-<h4> Logout: </h4> On successful detection of a SQLi attack, the SRE proposes to logout the user from the system. 
+** Logout:** On successful detection of a SQLi attack, the SRE proposes to logout the user from the system. 
 
 <h4> Block a User: </h4> The SRE specifications provide a mechanism to block a user, in case he/she attempts to launch an attack on system. The SRE may log the details of a malicious user in an XML file and block the user temporarily.
 
