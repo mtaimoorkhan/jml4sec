@@ -12,15 +12,14 @@ The RSM uses the extended JML specifications to annotate the security properties
 
 The requires clause of compromised_behavior specification consists of two parts: (a) the left side of -> symbol defines the Boolean expression (condition) represented through jml-spec-expr whereas the right side defines the attack. Similarly, other clauses can be interpreted. The basic difference between requires and alarms clauses is the generated code. Indeed, the Runtime Security Monitor only generates assertions against the requires clause. In contrast, the alarms clause also generates code to document the ongoing attack and the available metadata such as failed condition, module (method) name and time of the attack, etc.  
 
-<h2> A working Example: </h2>
+<h2> A Working Example: </h2>
 The below Figure presents the extended JML specifications for IsLogin (...) method of class DB, along with automatically instrumented Java code. Upon successful detection of a SQLOrInjection attack, the attack details are logged in an XML file through the method addAttackDetails(...). The first parameter of the method Uty.addAttackDetails() is the module name - a module name consists of class and method name. The second parameter is the type of attack, whereas the third parameter represents the failed condition. The 4th and 5th parameters represent the variable name and data that cause SQL injection attacks.
 
 
 
 <img width="733" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136648159-e8f7df62-7c19-4b57-9d30-ce8b2f8594a0.png">
 
-  
-# How to use JML4Sec?
+<h2> How to use JML4Sec? </h2>
 
 The JML4Sec can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the SecRuntime Monitor is primarily designed to aid programmers in writing safe E-Commerce system. 
 
