@@ -1,5 +1,8 @@
 # RSM (Runtime Security Monitor)
-RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments, and logs the detected threats as shown in the below block diagram of Figure 1. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. The RSM logs the detected attacks in an XML file.
+RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments as shown in the below block diagram. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. The RSM logs the detected attacks in an XML file.
+
+<img width="681" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/136646721-6694d4b6-12d5-4fd6-867f-ace2b6af0bb5.png">
+
 
 ![image](https://user-images.githubusercontent.com/1769347/136646441-87b2b4d6-007f-4b80-a61a-905937d783c2.png)
 
@@ -12,7 +15,7 @@ Jml4Sec consists of two main modules : (a) Behavioural Detection Monitor (b) Beh
 
 
 JML4Sec takes JML annotated Java programs as an input, automatically translates the JML specifications into detection and recovery code. Basically, JML4Sec syntactically translates specifications into assertions, code-gaurd through if and code related with recovery action. The below figure provides the block diagram of JML4Sec.
-<img width="681" alt="Screen Shot 2021-09-13 at 3 53 15 PM" src="https://user-images.githubusercontent.com/1769347/133071534-aaa38d82-5fc1-433a-bbf2-9f53eb76b191.png">
+
 
 The below figure provides the detection and recovery specifications for a method named "addtoCart".
 
