@@ -42,7 +42,7 @@ The below Figure presents the extended JML specifications for IsLogin (...) meth
 
 <img width="733" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136648159-e8f7df62-7c19-4b57-9d30-ce8b2f8594a0.png">
 
-<h2> How to use JML4Sec? </h2>
+<h2> How to use RSM? </h2>
 
 The JML4Sec can be executed both through command line and the Eclipse IDE development environment – though we encourage to use with the aid of development environment. Please note, the SecRuntime Monitor is primarily designed to aid programmers in writing safe E-Commerce system. 
 
