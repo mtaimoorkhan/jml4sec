@@ -19,7 +19,10 @@ The key features of SRE are listed below:
 
 **Rollback a Transaction:** The SRE provides a mechanism to programmer to rollback a malicious transaction, in case of a SQLi attack. 
 
-<h4> Used Specifiucation Language </h4>
+<h3> Used Specifiucation Language </h3>
+
+The @normal_behavior annotation is used to specify the basic sanitary checks, whereas the @compromised_behavior is an extended annotation that can be used to specify system behaviour against the defined classes of cyber-attacks. The @action_behavior annotation is used to specify the recovery (action). The action clause of action_bhavior specification consists of two parts: (a) the left side of -> symbol defines the Boolean expression (condition) represented through jml-spec-expr whereas the right side defines the action. ![image](https://user-images.githubusercontent.com/1769347/136649659-e4bfaf56-f288-43bf-8fed-18c5625966e9.png)
+
 
 <img width="650" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136649597-6a36ec03-0469-4afc-a193-ebe5f022401f.png">
 
