@@ -1,4 +1,8 @@
-# jml4sec
+# RSM (Runtime Security Monitor)
+RSM is an inline monitor that takes JML annotated Java programs as an input, automatically translates the JML specifications into assertions and if statments, and logs the detected threats as shown in the below block diagram of Figure 1. The users of RSM are supposed to manualy specify the Java programs.  At run-time, any violation of an assertion indicates a related unpleasant incident. ![image](https://user-images.githubusercontent.com/1769347/136646441-87b2b4d6-007f-4b80-a61a-905937d783c2.png)
+
+
+
 Jml4Sec consists of two main modules : (a) Behavioural Detection Monitor (b) Behavioural Recovery Monitor. The former detects cyber attacks, particularly attacks through SQLi and HTTP Servlets objects whereas the later provides mechanism to recover from the occured cyber attack. Bascially the programmer is supposed to specify the detection and recovery actions through extended JML specifications.  The syntax of the extended JML specifications is provided in below figure. 
 
 <img width="569" alt="Screen Shot 2021-09-13 at 3 47 10 PM" src="https://user-images.githubusercontent.com/1769347/133070884-abf2ee99-e492-4b84-9c12-00d57b47b1af.png">
