@@ -19,30 +19,6 @@ The below Figure presents the extended JML specifications for IsLogin (...) meth
 
 <img width="733" alt="Screen Shot 2021-10-09 at 12 08 29 PM" src="https://user-images.githubusercontent.com/1769347/136648159-e8f7df62-7c19-4b57-9d30-ce8b2f8594a0.png">
 
-
-
-
-
-
-
-
-
-
-
-
-Jml4Sec consists of two main modules : (a) Behavioural Detection Monitor (b) Behavioural Recovery Monitor. The former detects cyber attacks, particularly attacks through SQLi and HTTP Servlets objects whereas the later provides mechanism to recover from the occured cyber attack. Bascially the programmer is supposed to specify the detection and recovery actions through extended JML specifications.  The syntax of the extended JML specifications is provided in below figure. 
-
-<img width="569" alt="Screen Shot 2021-09-13 at 3 47 10 PM" src="https://user-images.githubusercontent.com/1769347/133070884-abf2ee99-e492-4b84-9c12-00d57b47b1af.png">
-
-
-
-JML4Sec takes JML annotated Java programs as an input, automatically translates the JML specifications into detection and recovery code. Basically, JML4Sec syntactically translates specifications into assertions, code-gaurd through if and code related with recovery action. The below figure provides the block diagram of JML4Sec.
-
-
-The below figure provides the detection and recovery specifications for a method named "addtoCart".
-
-<img width="518" alt="Screen Shot 2021-09-13 at 4 05 21 PM" src="https://user-images.githubusercontent.com/1769347/133073092-922b6784-930c-47af-96c2-a9564b4c2b35.png">
-
   
 # How to use JML4Sec?
 
