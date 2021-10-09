@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<attacks>
+
+<attack>
+<component_name>DbBridge.IsLogin</component_name>
+<type>InBand_Sqli</type>
+<failed_condition>IsSQLiORAttack(password)</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>16/07/2021 14:23:56</time>
+<recovery_actions>
+<recovery_action>email("SQLiORAttack","administrator@gmail.com")</recovery_action>
+<recovery_action>redirect("malacious.jsp")</recovery_action>
+</recovery_actions>
+</attack>
+
+<attack>
+<component_name>JBookShop.addToCart</component_name>
+<type>Unauthorized_port</type>
+<failed_condition>request.getServerPort ()  !=8080)</failed_condition>
+<variable_name>NA</variable_name>
+<corrupted_data>NA</corrupted_data>
+<time>16/07/2021 16:23:56</time>
+<recovery_actions>
+<recovery_action>nullifyObject(session)</recovery_action>
+<recovery_action>nullifyObject(response)</recovery_action>
+<recovery_action>nullifyObject(request)</recovery_action>
+<recovery_action>redirect("malacious.jsp")</recovery_action>
+</recovery_actions>
+</attack>
+
+
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>ErrorBased_Sqli</type>
+<failed_condition>IsErrorBasedAttack(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>;</corrupted_data>
+<time>16/07/2021 14:23:56</time>
+</attack>
+<attack>
+<component_name>DbBridge.IsLogin</component_name>
+<type>InBand_Sqli</type>
+<failed_condition>IsSQLiORAttack(password)</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>16/07/2021 14:26:20</time>
+</attack>
+<attack>
+<component_name>DbBridge.insertOrderDetails</component_name>
+<type>UnionBased_Sqli</type>
+<failed_condition>IsUnionBasedAttack(name)</failed_condition>
+<variable_name>name</variable_name>
+<corrupted_data>union ...</corrupted_data>
+<time>16/07/2021 14:26:20</time>
+</attack>
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>ErrorBased_Sqli</type>
+<failed_condition>IsErrorBasedAttack(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>;</corrupted_data>
+<time>16/07/2021 14:26:20</time>
+</attack>
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>BufferOverFlow</type>
+<failed_condition>IsBufferOverFlow(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>7898989756498799966</corrupted_data>
+<time>16/07/2021 14:26:20</time>
+</attack>
+<attack>
+<component_name>DbBridge.IsLogin</component_name>
+<type>InBand_Sqli</type>
+<failed_condition>IsSQLiORAttack(password)</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>DbBridge.insertOrderDetails</component_name>
+<type>UnionBased_Sqli</type>
+<failed_condition>IsUnionBasedAttack(name)</failed_condition>
+<variable_name>name</variable_name>
+<corrupted_data>union ...</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>ErrorBased_Sqli</type>
+<failed_condition>IsErrorBasedAttack(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>;</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>BufferOverFlow</type>
+<failed_condition>IsBufferOverFlow(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>7898989756498799966</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>DbBridge.updateInventory</component_name>
+<type>BufferOverFlow</type>
+<failed_condition>IsBufferOverFlow(qty)</failed_condition>
+<variable_name>qty</variable_name>
+<corrupted_data>7898989756498799966</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>JBookShop.addToCart</component_name>
+<type>undefined_port</type>
+<failed_condition>assert request.getServerPort() == 8080</failed_condition>
+<variable_name>request</variable_name>
+<corrupted_data>-80</corrupted_data>
+<time>16/07/2021 14:34:49</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>02/08/2021 17:36:43</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>JMLUtilityFunctions.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or </corrupted_data>
+<time>02/08/2021 18:03:58</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or </corrupted_data>
+<time>02/08/2021 18:03:58</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>JMLUtilityFunctions.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>02/08/2021 18:13:02</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>02/08/2021 18:13:02</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>JMLUtilityFunctions.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>02/08/2021 18:25:28</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>02/08/2021 18:25:28</time>
+</attack>
+<attack>
+<component_name>setId</component_name>
+<type>MarshalingError</type>
+<failed_condition>JMLUtilityFunctions.Is(id) &lt; 0</failed_condition>
+<variable_name>id</variable_name>
+<corrupted_data>-1</corrupted_data>
+<time>03/08/2021 14:51:33</time>
+</attack>
+<attack>
+<component_name>setId</component_name>
+<type>MarshalingError</type>
+<failed_condition>JMLUtilityFunctions.Is(id) &lt; 0</failed_condition>
+<variable_name>id</variable_name>
+<corrupted_data>-1</corrupted_data>
+<time>03/08/2021 14:53:06</time>
+</attack>
+<attack>
+<component_name>setId</component_name>
+<type>MarshallingError</type>
+<failed_condition>id &lt; 10</failed_condition>
+<variable_name>id</variable_name>
+<corrupted_data>-5</corrupted_data>
+<time>03/08/2021 18:14:03</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>09/08/2021 14:28:30</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:49</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin or 2</corrupted_data>
+<time>09/08/2021 16:35:50</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:37:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:24</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>admin1 or </corrupted_data>
+<time>09/08/2021 16:43:25</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:40</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin or </corrupted_data>
+<time>09/08/2021 16:46:41</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:49:05</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Utility.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>Admin1 or</corrupted_data>
+<time>09/08/2021 16:50:59</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 19:39:26</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 19:58:20</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:11:28</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:11:28</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:11:28</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:18:23</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:18:23</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:18:23</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:18:23</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:18:23</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:20:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:20:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:20:06</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:20:06</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:20:06</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:12</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:12</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:12</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:21:13</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:21:13</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:53</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:53</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:21:53</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:21:53</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:21:53</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:22:49</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:22:49</time>
+</attack>
+<attack>
+<component_name>isLogin</component_name>
+<type>SQLINJECTION</type>
+<failed_condition>Uty.IsSQLiORAttack(password) &lt; 1</failed_condition>
+<variable_name>password</variable_name>
+<corrupted_data>ad' OR '1=1</corrupted_data>
+<time>11/08/2021 20:22:49</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:22:49</time>
+</attack>
+<attack>
+<component_name>redirectToPage</component_name>
+<type>MalciousUrl</type>
+<failed_condition>Uty.IsAllowedUrl(page) &lt; 1</failed_condition>
+<variable_name>page</variable_name>
+<corrupted_data>bookstore.jsp</corrupted_data>
+<time>11/08/2021 20:22:49</time>
+</attack>
+</attacks>

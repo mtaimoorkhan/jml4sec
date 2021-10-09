@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<file_paths>
+<path>c:\\dir\\a.txt</path>
+<path>c:\\dir2\\abc\\b.txt</path>
+</file_paths>
+<allowed_urls>
+<url>a.jsp</url>
+<url>b.jsp</url>
+</allowed_urls>
+</config>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<student>
+<meta_data>
+    <name>id</name>
+    <type>int</type>
+    <max>0</max>
+    <min>100</min>
+</meta_data>
+
+<meta_data>
+    <name>id</name>
+    <type>int</type>
+    <max>1000</max>
+    <min>0</min>
+</meta_data>
+   
+</student>
