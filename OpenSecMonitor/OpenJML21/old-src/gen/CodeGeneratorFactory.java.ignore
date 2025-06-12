@@ -1,0 +1,39 @@
+package uk.gre.ac.openjmlsec.gen;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+//import uk.gre.ac.openjmlsec.gen.impl.ActionBehaviorCodeGenerator;
+import uk.gre.ac.openjmlsec.gen.impl.CompileTimeEscVerificationCodeGenerator;
+//import uk.gre.ac.openjmlsec.gen.impl.CompromisedBehaviorCodeGenerator;
+import uk.gre.ac.openjmlsec.gen.impl.SMTVerificationCodeGenerator;
+import uk.gre.ac.openjmlsec.gen.utils.GenUtils;
+
+public final class CodeGeneratorFactory {
+
+    private static final Map<String, MethodCodeGenerator> GENERATORS = new HashMap<>();
+
+    private CodeGeneratorFactory() {
+    }
+
+    static {
+        //GENERATORS.put(CompromisedBehaviorCodeGenerator.instance.generatorKey(),
+        //        CompromisedBehaviorCodeGenerator.instance);
+        //GENERATORS.put(ActionBehaviorCodeGenerator.instance.generatorKey(),
+        //        ActionBehaviorCodeGenerator.instance);
+        GENERATORS.put(GenUtils.SMT_VERIFY_CODE_GEN_FACTORY_KEY,
+                SMTVerificationCodeGenerator.instance);
+        //GENERATORS.put(GenUtils.COMPILETIME_ESC_VERIFY_CODE_GEN_FACTORY_KEY,
+        //        CompileTimeEscVerificationCodeGenerator.instance);
+    }
+
+    public static MethodCodeGenerator methodCodeGenerator(String generatorKey) {
+        return GENERATORS.get(generatorKey);
+    }
+
+    public static Set<String> generatableClauses() {
+        return GENERATORS.keySet();
+    }
+
+}

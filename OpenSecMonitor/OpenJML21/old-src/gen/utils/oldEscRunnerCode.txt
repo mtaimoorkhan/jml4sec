@@ -1,0 +1,249 @@
+
+
+    /*
+            
+            String[] args =  (methodName == null)?
+                new String[]{"-esc", filePath}:
+                new String[]{"-esc", filePath, "-method", methodName};
+    success = 
+                    exitCode == 0
+                    && (
+                        result.equals(IProverResult.SAT.toString().toLowerCase())
+                        || (
+                            result.equals(IProverResult.UNSAT.toString().toLowerCase())
+                            &&
+                            output_string.equals("")
+                        )
+                    )
+            ;
+            output.add("Result: " + result);
+            int index = output_string.indexOf('\n');
+            String result = output_string.substring(0, index).trim().toLowerCase();
+            output_string = output_string.substring(index).trim();
+    
+    
+    ProcessBuilder builder = new ProcessBuilder();
+
+    builder.command("/bin/sh", "-c",
+            new File(OPENJML_PATH).getAbsolutePath() + " -exec /home/workvm/Documents/openjml/Solvers-linux/z3-4.3.1" + " -esc "
+                    + filePath + " --method " + methodName + " -verbose");
+
+    builder.redirectErrorStream(true);
+
+    Process process = builder.start();
+
+    Queue<String> outputFragments = new ConcurrentLinkedQueue<>();
+    StreamGobbler outputGobbler = new StreamGobbler(
+            process.getInputStream(), outputFragments::add);
+
+    outputGobbler.start();
+
+    int exitCode = process.waitFor();
+    if (exitCode != 0) {
+        System.out.println("Failed to check esc. (error code: "+exitCode+")");
+    }
+
+    output.addAll(
+            outputFragments.stream().collect(Collectors.toList()));
+    
+    success = exitCode == 0;
+    /*/
+    /*
+            
+            //Init
+            Context ctx = new Context();
+            JavacFileManager file_manager = new JavacFileManager(new Context(), true, null);
+            ArrayList<File> files = new ArrayList<File>();
+            files.add(new File(filePath));
+            
+            //Unpack
+            JavaFileObject file_obj = null;
+            for (JavaFileObject fo : file_manager.getJavaFileObjectsFromFiles(files)){
+                file_obj = fo;
+                break;
+            }
+            file_manager.close();
+            
+            //Parse
+            JavaCompiler java_comp = new JavaCompiler(ctx);
+            JCCompilationUnit jccu = java_comp.parse(file_obj);
+            
+            
+            //Find function
+            if (jccu.defs.size() == 0 || jccu.defs.get(0).getTag() != JCTree.Tag.CLASSDEF) {
+                System.out.println("Root is not a class");
+                return false;
+            }
+            JCTree.JCClassDecl cls = (JCTree.JCClassDecl) jccu.defs.get(0);
+            JCTree.JCMethodDecl method_def = null;
+            for (JCTree def: cls.defs) {
+                if (def.getTag() == JCTree.Tag.METHODDEF) {
+                    JCTree.JCMethodDecl method = (JCTree.JCMethodDecl) def;
+                    if (methodName.equals(method.getName().toString())){
+                        method_def = method;
+                        break;
+                    }
+                }
+            }
+            if (method_def == null) {
+                System.out.println("Cannot find function");
+                return false;
+            }
+            System.out.println("Method: " + method_def.getName().toString());
+            
+
+            System.out.println("null?: " + method_def.sym);
+            
+            
+            JmlEsc esc = new JmlEsc(ctx);
+            
+            IProverResult res = new MethodProverSMT(esc).prove(method_def, "z3-4.3.0");
+            
+            //----
+            
+            
+            
+            
+            API api = Factory.makeAPIImpl();
+            
+            JmlCompilationUnit unit = api.parseSingleFile(filePath);
+            
+            if (unit.defs.size() == 0 || unit.defs.get(0).getTag() != JCTree.Tag.CLASSDEF) {
+                System.out.println("Root is not a class");
+                return false;
+            }
+            JmlTree.JmlClassDecl cls = (JmlTree.JmlClassDecl) unit.defs.get(0);
+            JmlTree.JmlMethodDecl method_def = null;
+            for (JCTree def: cls.defs) {
+                if (def.getTag() == JCTree.Tag.METHODDEF) {
+                    JmlTree.JmlMethodDecl method = (JmlTree.JmlMethodDecl) def;
+                    if (methodName.equals(method.getName().toString())){
+                        method_def = method;
+                        break;
+                    }
+                }
+            }
+            if (method_def == null) {
+                System.out.println("Cannot find function");
+                return false;
+            }
+            System.out.println("Method: " + method_def.getName().toString());
+            System.out.println("null?: " + method_def.sym);
+            
+
+            Context ctx = new Context();
+            JavacFileManager file_manager = new JavacFileManager(ctx, true, null);
+            JmlEsc esc = new JmlEsc(ctx);
+            IProverResult res = new MethodProverSMT(esc)
+                    .prove(method_def, "z3-4.3.0");
+            System.out.println(res.toString());
+            file_manager.close();
+            
+            //---
+            
+            //Init
+            Context ctx = new Context();
+            JavacFileManager file_manager = new JavacFileManager(new Context(), true, null);
+            ArrayList<File> files = new ArrayList<File>();
+            files.add(new File(filePath));
+            
+            //Unpack
+            JavaFileObject file_obj = null;
+            for (JavaFileObject fo : file_manager.getJavaFileObjectsFromFiles(files)){
+                file_obj = fo;
+                break;
+            }
+            file_manager.close();
+            
+            //Parse
+            JavaCompiler java_comp = new JavaCompiler(ctx);
+            JCCompilationUnit jccu = java_comp.parse(file_obj);
+            
+            
+            //Find function
+            if (jccu.defs.size() == 0 || jccu.defs.get(0).getTag() != JCTree.Tag.CLASSDEF) {
+                System.out.println("Root is not a class");
+                return false;
+            }
+            JCTree.JCClassDecl cls = (JCTree.JCClassDecl) jccu.defs.get(0);
+            JCTree.JCMethodDecl method_def = null;
+            for (JCTree def: cls.defs) {
+                if (def.getTag() == JCTree.Tag.METHODDEF) {
+                    JCTree.JCMethodDecl method = (JCTree.JCMethodDecl) def;
+                    if (methodName.equals(method.getName().toString())){
+                        method_def = method;
+                        break;
+                    }
+                }
+            }
+            if (method_def == null) {
+                System.out.println("Cannot find function");
+                return false;
+            }
+            System.out.println("Method: " + method_def.getName().toString());
+            System.out.println("null?: " + method_def.sym);
+            
+            
+            JmlEsc esc = new JmlEsc(ctx);
+            esc.visitMethodDef(method_def);
+            
+     */
+    
+    /*
+            System.out.println("filePath: "+filePath);
+            String[] args = {"-esc", "-boogie", filePath, "-verbose"}; // , "--method", methodName
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            int exitCode = Main.execute(pw, null, null, args);
+            output.add(sw.getBuffer().toString());
+            success = exitCode == 0;
+     */
+    
+    /*
+    //, "-verbose"
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            int old = MethodProverSMT.startFeasibilityCheck;
+            MethodProverSMT.startFeasibilityCheck = 1;
+            int exitCode = Main.execute(pw, null, null, args);
+            MethodProverSMT.startFeasibilityCheck = old;
+            
+            String output_string = sw.getBuffer().toString().trim();
+     */
+    
+   /*
+   public static List<String> runEsc(String filePath, String methodName) {
+
+        List<String> output = new ArrayList<>();
+        try {
+            ProcessBuilder builder = new ProcessBuilder();
+
+            builder.command("/bin/sh", "-c",
+                    new File(OPENJML_PATH).getAbsolutePath() + " -esc "
+                            + filePath + " --method " + methodName);
+
+            builder.redirectErrorStream(true);
+
+            Process process = builder.start();
+
+            Queue<String> outputFragments = new ConcurrentLinkedQueue<>();
+            StreamGobbler outputGobbler = new StreamGobbler(
+                    process.getInputStream(), outputFragments::add);
+
+            outputGobbler.start();
+
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                System.out.println("Failed to check esc. (error code: "+exitCode+")");
+            }
+
+            output.addAll(
+                    outputFragments.stream().collect(Collectors.toList()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return output;
+
+    }*/

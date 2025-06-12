@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="module-info.java" kind="src" path="java.base.gensrc"/>
+	<classpathentry excluding="module-info.java" kind="src" path="jdk.internal.opt"/>
+	<classpathentry kind="src" path="jdk.compiler.gensrc"/>
+	<classpathentry excluding="module-info.java" kind="src" path="java.base"/>
+	<classpathentry excluding="module-info.java" kind="src" path="java.base.macos"/>
+	<classpathentry excluding="module-info.java" kind="src" path="java.compiler"/>
+	<classpathentry excluding="module-info.java" kind="src" path="jdk.compiler"/>
+	<classpathentry kind="lib" path="/home/workvm/Documents/Work21/otherlibs/gson-2.8.1.jar"/>
+	<classpathentry excluding="demo.share|hotspot|test|utils.*" kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
