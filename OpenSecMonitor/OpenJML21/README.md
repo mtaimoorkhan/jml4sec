@@ -5,7 +5,7 @@ This is a fork of the OpenJML tool with additions for run-time security.
 ## OpenJML Additions
 Additions to source files outside of "uk.re.ac.openjmlsec" are marked with the header `//ADD-OPENJMLSEC` and footer `//ADD-END` for easy searching and replacement
 
-Only the project jdk.compiler has been editied.
+Only the module jdk.compiler has been edited.
 
 
 # Project set up
@@ -16,6 +16,7 @@ The root of the project setup should have the projects:
 - JMLAnnotations
 - openjml.github.io
 - Solvers
+
 Each of these repos can be pulled / downloaded from [OpenJML's github](https://github.com/OpenJML)
 
 This project is located in OpenJML-master/OpenJML21 (and where all commands should be ran in)
