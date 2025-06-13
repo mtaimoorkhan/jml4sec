@@ -37,9 +37,19 @@ public class EscRunner {
         int exitCode = 0;
         ProcessBuilder builder = new ProcessBuilder();
         
-        builder.command("/bin/sh", "-c",
-                new File(FilePaths.OPENJML_PATH).getAbsolutePath() + " -esc "
-                        + filePath + ((methodName == null)? "": (" --method " + methodName)));
+        String command =
+    		new File(FilePaths.OPENJML_PATH).getAbsolutePath()
+    		+ " -classpath \"" + System.getProperty("java.class.path") + "\""
+    		//+ " --add-modules jdk.compiler,java.base --add-exports=jdk.compiler/uk.gre.ac.openjmlsec.gen=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.ext=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.proverinterface=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.visitors=ALL-UNNAMED"
+    	
+    		+ " -esc " + filePath
+            + (
+        		(methodName == null)? "":
+        		(" --method " + methodName)
+            )
+    		;
+        System.out.println("command: " + command);
+        builder.command("/bin/sh", "-c", command);
 
         builder.redirectErrorStream(true);
         

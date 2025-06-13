@@ -80,7 +80,7 @@ public class CompileTimeEscVerificationCodeGenerator
         java.util.HashMap<String, ArrayList<JCExpression>> signals_calls = new HashMap<>();
         
     	for (JmlSpecificationCase specCase : tree.cases) {
-            JCTree.JCExpression prev_expr = null;
+            //JCTree.JCExpression prev_expr = null;
             for (JmlMethodClause clause : specCase.clauses) {
                 String clauseName = clause.clauseKind.keyword;
                 
@@ -111,7 +111,8 @@ public class CompileTimeEscVerificationCodeGenerator
                 		clauseName.equalsIgnoreCase(MethodExprClauseExtensions.ensuresID)
                 		|| clauseName.equalsIgnoreCase(MethodExprClauseExtensions.requiresID)
                 ) {
-                    GetNames(prev_expr, used_variables);
+                	JmlMethodClauseExpr expr = (JmlMethodClauseExpr) clause;
+                    GetNames(expr.expression, used_variables);
                 }
             }
         }
@@ -234,7 +235,9 @@ public class CompileTimeEscVerificationCodeGenerator
        if (expr_base == null || list == null) return;
        
        if (expr_base instanceof JCTree.JCIdent) {
-           list.add(((JCIdent) expr_base).name);
+    	   Name name = ((JCIdent) expr_base).name;
+    	   if (name.toString() != "null")
+    		   list.add(name);
        } else if (expr_base instanceof JCTree.JCBinary) {
            JCTree.JCBinary expr = (JCTree.JCBinary) expr_base;
            GetNames(expr.lhs, list);
@@ -256,7 +259,11 @@ public class CompileTimeEscVerificationCodeGenerator
             GetNames(expr.indexed, list);
         } else if (expr_base instanceof JCTree.JCFieldAccess) {
         	JCTree.JCFieldAccess expr = (JCTree.JCFieldAccess) expr_base;
-            GetNames(expr.selected, list);
+        	/*HashSet<Name> names = new HashSet<>();
+            GetNames(expr.selected, names);
+            for (var name: names) {
+            	list.add(name.append('.', expr.name));
+            }*/
         } else if (expr_base instanceof JmlTree.JmlChained) {
             JmlTree.JmlChained expr = (JmlTree.JmlChained) expr_base;
             for (JCBinary c: expr.conjuncts) GetNames(c, list);

@@ -15,6 +15,7 @@ import uk.gre.ac.openjmlsec.gen.EscRunner;
 import java.util.ArrayList;
 
 public class JML4Sec {
+	private JML4Sec() {}
 	
     public static void main(String[] args) {
         if (args.length != 1) {
@@ -46,7 +47,7 @@ public class JML4Sec {
         String output_code = null;
         
         //This causes some errors if not fully working, so is commented out when testing features
-        //*Do esc check on entire class
+        /*Do esc check on entire class
         System.out.println("Esc checking");
         ArrayList<String> output = new ArrayList<>();
         if (!EscRunner.runEsc(filePath, null, output)) {

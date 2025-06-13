@@ -506,7 +506,7 @@ public class JmlPretty extends Pretty implements IJmlVisitor {
     }
 
     public void visitJmlMethodClauseAction(JmlMethodClauseAction that) {
-        try { 
+        try {
             print(useCanonicalName ? that.clauseKind.keyword() : that.keyword);
             print(" " + that.actionType + " "); 
             printStat(that.statement);

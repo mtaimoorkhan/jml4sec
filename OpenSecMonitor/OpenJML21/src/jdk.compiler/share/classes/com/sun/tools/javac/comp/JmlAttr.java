@@ -4191,7 +4191,7 @@ public class JmlAttr extends Attr implements IJmlVisitor {
     //ADD-OPENJMLSEC(Wyatt)
     @Override
     public void visitJmlMethodClauseAlarms(JmlMethodClauseAlarms tree) {
-        attribExpr(tree.expression, env, syms.booleanType);
+        //attribExpr(tree.expression, env, syms.booleanType);
     }
     
     @Override

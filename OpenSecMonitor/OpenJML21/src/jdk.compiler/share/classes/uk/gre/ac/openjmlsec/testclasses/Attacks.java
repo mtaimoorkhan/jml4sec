@@ -1,15 +1,21 @@
 package uk.gre.ac.openjmlsec.testclasses;
 
-public enum Attacks {
-    SQL_OR_ATTACK(1), SQL_AND_ATTACK(2), INJECTION(3), NONE(0), TEST(-1);
-
-    private final int attack;
-
-    private Attacks(int attack) {
-        this.attack = attack;
-    }
-
-    public boolean isAttack() {
-        return this.attack != 0;
-    }
+public class Attacks {
+	public int NONE = 0;
+	public int SQL_INJECTION = 1;
+	
+	//@ pure
+	public static boolean HasSQLInjection(String s) {
+		return 
+			s.matches(".*['\"](\\s|.*)(([oO][rR])|([aA][nN][dD]))\\s([^=]*)[=].*")
+			|| s.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*")
+			|| s.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*")
+		;
+	}
+	
+	//@ pure
+	public static void Log(String msg) {
+		System.out.println(msg);
+	}
+	
 }

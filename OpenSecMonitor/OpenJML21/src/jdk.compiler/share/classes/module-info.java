@@ -227,7 +227,7 @@ module jdk.compiler {
     exports com.sun.tools.javac;
 	
     //ADD-OPENJMLSEC(Wyatt)-RUN
-    //exports uk.gre.ac.openjmlsec;
+    exports uk.gre.ac.openjmlsec;
 
 	//exports com.sun.tools.javac.main;
     //exports com.sun.tools.javac.code;

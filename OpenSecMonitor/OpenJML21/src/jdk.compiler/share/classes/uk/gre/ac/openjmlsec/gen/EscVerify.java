@@ -3,6 +3,7 @@ package uk.gre.ac.openjmlsec.gen;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -68,6 +69,7 @@ public class EscVerify {
         boolean success = false;
         
         String classLocation = className.replaceAll("\\.", "/");
+        Path classFilePath = Paths.get(FilePaths.SOURCE_FOLDER + classLocation+ ".java").toAbsolutePath();
 
         Path sourceFilePath = null;
 
@@ -75,10 +77,10 @@ public class EscVerify {
         	//Parse file
             API api = Factory.makeAPIImpl();
             RefranceInstanceRegister();
-            JmlCompilationUnit unit = api.parseSingleFile(FilePaths.SOURCE_FOLDER + classLocation + ".java");
+            JmlCompilationUnit unit = api.parseSingleFile(classFilePath.toString());
             
-            //Create temp file
-            sourceFilePath = Files.createTempFile("Test_", ".java");
+            sourceFilePath = Files.createTempFile(classFilePath.getParent(), "Test_", ".java");
+            
             String new_main_class = sourceFilePath.getFileName().toString().replace(".java", "");
             
             //Parse code
