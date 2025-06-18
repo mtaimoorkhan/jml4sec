@@ -19,6 +19,7 @@ import org.jmlspecs.openjml.JmlTree.JmlMethodSpecs;
 import org.jmlspecs.openjml.JmlTree.JmlSpecificationCase;
 import org.jmlspecs.openjml.esc.Label;
 import org.jmlspecs.openjml.ext.MethodExprClauseExtensions;
+import org.jmlspecs.openjml.ext.QuantifiedExpressions;
 import org.jmlspecs.openjml.ext.SingletonExpressions;
 import org.jmlspecs.openjml.ext.StatementExprExtensions;
 import org.jmlspecs.openjml.ext.TypeExprClauseExtension;
@@ -119,7 +120,9 @@ public class EscVerify {
 		//References each class by calling to string
     	var temp = ""
 		+ TypeExprClauseExtension.invariantClause.toString()
-		+ SingletonExpressions.resultKind.toString();
+		+ SingletonExpressions.resultKind.toString()
+    	+ QuantifiedExpressions.qforallKind.toString()
+    	;
 	}
 
     private static class CodeGenerator extends JmlTreeScanner {
@@ -209,7 +212,7 @@ public class EscVerify {
             for (JmlSpecificationCase c: tree.cases) {
                 boolean reverse = c.token != null && (
                     c.token.keyword.equals("compromised_behavior")
-                    || c.token.keyword.equals("exceptional_behavior")
+                    //|| c.token.keyword.equals("exceptional_behavior")
                 );
                 
                 for (JmlMethodClause clause: c.clauses) {

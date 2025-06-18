@@ -1,17 +1,18 @@
 package uk.gre.ac.openjmlsec.testclasses;
 
-import uk.gre.ac.openjmlsec.testclasses.Attacks;
+//@ model import java.util.regex.Pattern;
 
 public class SqlInjection {
 	private final int VARCHAR_SIZE = 100;
+	private static boolean ForceCheck = false;
 	
 	/*
 	 * Updates some value in the data base
 	 */
 	//@ private normal_behavior
-	//@ requires an_agrument != null;
-	//@ requires !Attacks.HasSQLInjection(an_agrument);
+	//@ requires an_agrument != null && !Attacks.HasSQLInjection(an_agrument);
 	//@ also private compromised_behavior
+	//@ requires an_agrument == null || Attacks.HasSQLInjection(an_agrument);
 	//@ alarms SQL_INJECTION Attacks.HasSQLInjection(an_agrument);
 	//@ action SQL_INJECTION Attacks.Log("An SQL injection detected: " + an_agrument);
 	//@ pure // It probably wont be pure, but for this test case it is
@@ -26,5 +27,31 @@ public class SqlInjection {
 	public static void main(String[] args){
 		SomeSqlCall(10, "hello"); // Fine
 		SomeSqlCall(10, "hello ' oR   	1235   =   1235"); // Message printed
+	}
+	
+	private class Attacks{
+		/*//@ requires s != null;
+		//@ ensures \result == (Pattern.matches(".*['\"](\\s|.*)(([oO][rR])|([aA][nN][dD]))\\s([^=]*)[=].*", s) || Pattern.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*", s));
+		//@ pure
+		public static boolean HasSQLInjection(String s) {
+			return 
+				s.matches(".*['\"](\\s|.*)(([oO][rR])|([aA][nN][dD]))\\s([^=]*)[=].*")
+				|| s.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*")
+			;
+		}*/
+		
+
+		//@ public normal_behavior
+		//@ requires input != null;
+		//@ ensures \result == !(\forall int j; 0<=j && j<input.length(); !String.charEqualsIgnoreCase(input.charAt(j), '\''));
+		//@ pure
+		public static boolean HasSQLInjection(String input){
+			//No null bytes
+			return input.contains("'");
+		}
+		
+		public static void Log(String msg) {
+			System.out.println(msg);
+		}
 	}
 }

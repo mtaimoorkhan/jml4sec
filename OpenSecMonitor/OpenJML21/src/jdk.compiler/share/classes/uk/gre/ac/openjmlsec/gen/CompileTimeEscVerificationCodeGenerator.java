@@ -16,6 +16,7 @@ import org.jmlspecs.openjml.JmlTree.JmlSpecificationCase;
 import org.jmlspecs.openjml.ext.ActionClauseExtension;
 import org.jmlspecs.openjml.ext.AlarmsClauseExtension;
 import org.jmlspecs.openjml.ext.MethodExprClauseExtensions;
+import org.jmlspecs.openjml.ext.MethodSimpleClauseExtensions;
 import org.jmlspecs.openjml.ext.SignalsClauseExtension;
 import org.jmlspecs.openjml.Utils;
 
@@ -64,9 +65,32 @@ public class CompileTimeEscVerificationCodeGenerator
         System.out.println("DEBUG-SYM: " + Thread.currentThread().getStackTrace()[1]);
         
         JCTree.JCBlock methodBody = ((JCTree.JCMethodDecl) tree.decl).body;
-        JCTree.JCIf ifStatement = translateSpecsToIfStatements(tree, classname, sub_classes);
+        if (methodBody == null) {
+        	// A declaration or model method
+        	return;
+        }
+        //Check for compromised_behavior case
+        //Or for alarms, signals, or action clause
+        boolean do_translateSpecs = false;
+        for (JmlSpecificationCase specCase : tree.cases) {
+        	do_translateSpecs = do_translateSpecs
+        		|| (
+        			specCase.token != null
+        			&& specCase.token.keyword == MethodSimpleClauseExtensions.compromisedBehaviorID
+        		);
+        	for (JmlMethodClause clause : specCase.clauses) {
+        		do_translateSpecs = do_translateSpecs
+        			|| clause.clauseKind.keyword.equalsIgnoreCase(AlarmsClauseExtension.alarmsID)
+        			|| clause.clauseKind.keyword.equalsIgnoreCase(SignalsClauseExtension.signalsID)
+        			|| clause.clauseKind.keyword.equalsIgnoreCase(ActionClauseExtension.actionID)
+        		;
+        	}
+        }
+        if (do_translateSpecs) {
+            JCTree.JCIf ifStatement = translateSpecsToIfStatements(tree, classname, sub_classes);
 
-        methodBody.stats = methodBody.stats.prepend(ifStatement);
+            methodBody.stats = methodBody.stats.prepend(ifStatement);
+        }
     }
     
     /*
@@ -257,6 +281,10 @@ public class CompileTimeEscVerificationCodeGenerator
             JCTree.JCArrayAccess expr = (JCTree.JCArrayAccess) expr_base;
             GetNames(expr.index, list);
             GetNames(expr.indexed, list);
+        } else if (expr_base instanceof JCTree.JCTypeCast) {
+            JCTree.JCTypeCast expr = (JCTree.JCTypeCast) expr_base;
+            GetNames(expr.expr, list);
+            
         } else if (expr_base instanceof JCTree.JCFieldAccess) {
         	JCTree.JCFieldAccess expr = (JCTree.JCFieldAccess) expr_base;
         	/*HashSet<Name> names = new HashSet<>();

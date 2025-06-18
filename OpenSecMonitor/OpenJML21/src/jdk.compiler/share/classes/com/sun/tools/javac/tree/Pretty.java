@@ -635,6 +635,9 @@ public class Pretty extends JCTree.Visitor {
                     sourceOutput) return;
             println(); align();
             printDocComment(tree);
+            //ADD-OPENJMLSEC(Wyatt)
+            //@TODO change to print mods correctly
+            //ADD-END*/
             printExpr(tree.mods);
             printTypeParameters(tree.typarams);
             if (tree.name == tree.name.table.names.init) {

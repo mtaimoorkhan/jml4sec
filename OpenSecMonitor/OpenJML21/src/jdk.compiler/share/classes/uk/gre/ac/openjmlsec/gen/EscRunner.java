@@ -40,13 +40,17 @@ public class EscRunner {
         String command =
     		new File(FilePaths.OPENJML_PATH).getAbsolutePath()
     		+ " -classpath \"" + System.getProperty("java.class.path") + "\""
-    		//+ " --add-modules jdk.compiler,java.base --add-exports=jdk.compiler/uk.gre.ac.openjmlsec.gen=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.ext=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.proverinterface=ALL-UNNAMED --add-exports=jdk.compiler/org.jmlspecs.openjml.visitors=ALL-UNNAMED"
-    	
+    		// For testing
+    		+ " --specs-path /home/workvm/Documents/Work21/Specs/specs"
+    		//+ " --new-is-pure"
     		+ " -esc " + filePath
             + (
         		(methodName == null)? "":
         		(" --method " + methodName)
             )
+            //For testing
+    		//+ " -verbose"
+            
     		;
         System.out.println("command: " + command);
         builder.command("/bin/sh", "-c", command);
