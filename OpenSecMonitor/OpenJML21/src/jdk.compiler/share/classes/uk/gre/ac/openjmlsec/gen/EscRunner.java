@@ -52,7 +52,7 @@ public class EscRunner {
     		//+ " -verbose"
             
     		;
-        System.out.println("command: " + command);
+        //System.out.println("command: " + command);
         builder.command("/bin/sh", "-c", command);
 
         builder.redirectErrorStream(true);

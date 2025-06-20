@@ -12,6 +12,10 @@ public class MalInput {
     normal_behavior
       requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input); 
 also
+    exceptional_behavior
+      requires input == null; 
+      signals (NullPointerException) input == null; 
+also
     compromised_behavior
       requires Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input); 
       alarms TOO_LONG_INPUT Attacks.IsTooLong(input); 
@@ -24,28 +28,21 @@ also
         Attacks.Log("Too long input passed");
         input = Attacks.CutInputLength(input);
       }; 
-also
-    exceptional_behavior
-      requires input == null; 
-      signals (NullPointerException) input == null; 
    */
 
   /*@ pure*/ public static void DoSomething(String input) {
     if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("uk.gre.ac.openjmlsec.testclasses.MalInput", "", "String", "DoSomething", new java.lang.Object[]{input})) {
-      if (Attacks.IsMalformedInput(input)) {
-        Attacks.Log("Malformed input passed");
-        input = Attacks.RemoveMalformedCharacters(input);
+      if (input == null) {
+        throw new NullPointerException();
       }
       if (Attacks.IsTooLong(input)) {
         Attacks.Log("Too long input passed");
         input = Attacks.CutInputLength(input);
       }
-      if (input == null) {
-        throw new NullPointerException();
+      if (Attacks.IsMalformedInput(input)) {
+        Attacks.Log("Malformed input passed");
+        input = Attacks.RemoveMalformedCharacters(input);
       }
-    }
-    if (input == null) {
-      throw new NullPointerException();
     }
   }
   

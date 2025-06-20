@@ -62,7 +62,11 @@ public class CompileTimeEscVerificationCodeGenerator
     }
     
     public void addVerifyIfStatement(JmlMethodSpecs tree, String classname, String sub_classes) {
-        System.out.println("DEBUG-SYM: " + Thread.currentThread().getStackTrace()[1]);
+        //System.out.println("DEBUG-SYM: " + Thread.currentThread().getStackTrace()[1]);
+    	
+    	//No body
+    	if (tree.decl == null)
+    		return;
         
         JCTree.JCBlock methodBody = ((JCTree.JCMethodDecl) tree.decl).body;
         if (methodBody == null) {
@@ -97,11 +101,12 @@ public class CompileTimeEscVerificationCodeGenerator
      * Get the statements from jml specs
      * Also get all used variables
      */
-    private java.util.List<JCStatement> GetSpecStatements(JmlMethodSpecs tree, HashSet<Name> used_variables){
+    public java.util.List<JCStatement> GetSpecStatements(JmlMethodSpecs tree, HashSet<Name> used_variables){
     	//Parse statements
         java.util.HashMap<String, ArrayList<JCExpression>> alarms_calls = new HashMap<>();
         java.util.HashMap<String, ArrayList<JCStatement>> action_calls = new HashMap<>();
         java.util.HashMap<String, ArrayList<JCExpression>> signals_calls = new HashMap<>();
+        ArrayList<String[]> order = new ArrayList<>();
         
     	for (JmlSpecificationCase specCase : tree.cases) {
             //JCTree.JCExpression prev_expr = null;
@@ -115,6 +120,8 @@ public class CompileTimeEscVerificationCodeGenerator
                 		alarms_calls.put(key, new ArrayList<>());
                 	}
                 	alarms_calls.get(key).add(alarms_clause.expression);
+
+                	order.add(new String[] {"alarms", key});
                 
                 } else if (clauseName.equalsIgnoreCase(SignalsClauseExtension.signalsID)) {
                 	JmlMethodClauseSignals signals_clause = (JmlMethodClauseSignals) clause;
@@ -123,6 +130,8 @@ public class CompileTimeEscVerificationCodeGenerator
                 		signals_calls.put(key, new ArrayList<>());
                 	}
                 	signals_calls.get(key).add(signals_clause.expression);
+                	
+                	order.add(new String[] {"signals", key});
                     
                 } else if (clauseName.equalsIgnoreCase(ActionClauseExtension.actionID)) {
                     JmlMethodClauseAction action_clause = (JmlMethodClauseAction) clause;
@@ -145,39 +154,43 @@ public class CompileTimeEscVerificationCodeGenerator
         java.util.List<JCStatement> statements = new ArrayList<>();
         var run_time_throw = maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString("java.lang.RuntimeException")),  List.nil(), null));
         
-        //Alarms is first, if we can recover we should
-        for (String key: alarms_calls.keySet()) {
-        	java.util.List<JCStatement> action_statements = new ArrayList<>();
-        	if (action_calls.containsKey(key)) {
-        		for (JCStatement expr: action_calls.get(key)) {
-        			action_statements.add(expr);
-        		}
-        	} else {
-        		action_statements.add(run_time_throw);
-        	}
-        	JCExpression expression = alarms_calls.get(key).get(0);
-        	for (int i = 1; i < alarms_calls.get(key).size(); i++) {
-        		expression = maker.Binary(JCTree.Tag.OR, expression, alarms_calls.get(key).get(i));
+        for (String[] keys: order) {
+    		String key = keys[1];
+    		
+    		//Alarms
+        	if (keys[0].equals("alarms")) {
+        		java.util.List<JCStatement> action_statements = new ArrayList<>();
+            	if (action_calls.containsKey(key)) {
+            		for (JCStatement expr: action_calls.get(key)) {
+            			action_statements.add(expr);
+            		}
+            	} else {
+            		action_statements.add(run_time_throw);
+            	}
+            	JCExpression expression = alarms_calls.get(key).get(0);
+            	for (int i = 1; i < alarms_calls.get(key).size(); i++) {
+            		expression = maker.Binary(JCTree.Tag.OR, expression, alarms_calls.get(key).get(i));
+            	}
+            	
+            	statements.add(maker.If(expression, 
+        			(action_statements.size() == 1)?
+        				action_statements.get(0):
+        				maker.Block(0L, List.from(action_statements)), 
+        			null
+            	));
         	}
         	
-        	statements.add(maker.If(expression, 
-    			(action_statements.size() == 1)?
-    				action_statements.get(0):
-    				maker.Block(0L, List.from(action_statements)), 
-    			null
-        	));
-        }
-
-        //Signals is next for errors
-        for (String key: signals_calls.keySet()) {
-            JCStatement code = maker.Block(0L, List.of(maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString(key)), List.nil(), null))));
-            
-        	JCExpression expression = signals_calls.get(key).get(0);
-        	for (int i = 1; i < signals_calls.get(key).size(); i++) {
-        		expression = maker.Binary(JCTree.Tag.OR, expression, signals_calls.get(key).get(i));
+        	//Signals
+        	else if (keys[0].equals("signals")){
+                JCStatement code = maker.Block(0L, List.of(maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString(key)), List.nil(), null))));
+                
+            	JCExpression expression = signals_calls.get(key).get(0);
+            	for (int i = 1; i < signals_calls.get(key).size(); i++) {
+            		expression = maker.Binary(JCTree.Tag.OR, expression, signals_calls.get(key).get(i));
+            	}
+                
+                statements.add(maker.If(expression, code, null));
         	}
-            
-            statements.add(maker.If(expression, code, null));
         }
         
         //If there were not specs, just throw an error
@@ -299,6 +312,7 @@ public class CompileTimeEscVerificationCodeGenerator
             expr_base instanceof JCTree.JCLiteral
             || expr_base instanceof JmlTree.JmlSingleton
             || expr_base instanceof JCTree.JCErroneous
+            || expr_base instanceof JmlTree.JmlQuantifiedExpr
         )) {
             System.err.println("Unknown JCExpression: " + expr_base.getClass() +"\nPlease add code for it @"+Thread.currentThread().getStackTrace()[1]);
         }

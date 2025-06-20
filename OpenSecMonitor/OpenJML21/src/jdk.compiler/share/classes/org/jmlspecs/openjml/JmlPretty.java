@@ -831,7 +831,7 @@ public class JmlPretty extends Pretty implements IJmlVisitor {
     }
 
     public void visitJmlTypeClauseDecl(JmlTypeClauseDecl that) {
-        that.decl.accept(this); // FIXME - //@?
+    	that.decl.accept(this); // FIXME - //@?
     }
 
     public boolean useCanonicalName = true;
@@ -891,9 +891,14 @@ public class JmlPretty extends Pretty implements IJmlVisitor {
         try {
             if (that.specs != null) that.specs.accept(this);
             align();
+            //ADD-OPENMLSEC(Wyatt)
+            if (useJMLComments) print("//@ ");
+            //ADD-END*/
             if (that.modifiers != null) that.modifiers.accept(this);
             print(useCanonicalName ? that.clauseType.keyword() : that.keyword);
-            print(" {}");
+            //ADD-OPENMLSEC(Wyatt)
+            //print(" {}");
+            //ADD-END*/
             println();
         } catch (IOException e) { perr(that,e); }
     }

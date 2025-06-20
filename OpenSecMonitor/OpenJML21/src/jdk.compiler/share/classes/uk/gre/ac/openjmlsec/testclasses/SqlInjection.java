@@ -10,11 +10,11 @@ public class SqlInjection {
 	 * Updates some value in the data base
 	 */
 	//@ private normal_behavior
-	//@ requires an_agrument != null && !Attacks.HasSQLInjection(an_agrument);
+		//@ requires an_agrument != null && !Attacks.HasSQLInjection(an_agrument);
 	//@ also private compromised_behavior
-	//@ requires an_agrument == null || Attacks.HasSQLInjection(an_agrument);
-	//@ alarms SQL_INJECTION Attacks.HasSQLInjection(an_agrument);
-	//@ action SQL_INJECTION Attacks.Log("An SQL injection detected: " + an_agrument);
+		//@ requires an_agrument == null || Attacks.HasSQLInjection(an_agrument);
+		//@ alarms SQL_INJECTION Attacks.HasSQLInjection(an_agrument);
+		//@ action SQL_INJECTION Attacks.Log("An attempted SQL injection detected: " + an_agrument);
 	//@ pure // It probably wont be pure, but for this test case it is
 	private static boolean SomeSqlCall(int value, String an_agrument){
 		// Code calls a SQL lite or MySQL database
@@ -30,20 +30,9 @@ public class SqlInjection {
 	}
 	
 	private class Attacks{
-		/*//@ requires s != null;
-		//@ ensures \result == (Pattern.matches(".*['\"](\\s|.*)(([oO][rR])|([aA][nN][dD]))\\s([^=]*)[=].*", s) || Pattern.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*", s));
-		//@ pure
-		public static boolean HasSQLInjection(String s) {
-			return 
-				s.matches(".*['\"](\\s|.*)(([oO][rR])|([aA][nN][dD]))\\s([^=]*)[=].*")
-				|| s.matches(".*['\"](\\s|.*)([uU][nN][iI][oO][nN])\\s([sS][eE][lL][eE][cC][tT]).*")
-			;
-		}*/
-		
-
 		//@ public normal_behavior
-		//@ requires input != null;
-		//@ ensures \result == !(\forall int j; 0<=j && j<input.length(); !String.charEqualsIgnoreCase(input.charAt(j), '\''));
+			//@ requires input != null;
+			//@ ensures \result == !(\forall int j; 0<=j && j<input.length(); !String.charEqualsIgnoreCase(input.charAt(j), '\''));
 		//@ pure
 		public static boolean HasSQLInjection(String input){
 			//No null bytes

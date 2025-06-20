@@ -4,14 +4,14 @@ public class CompTest {
 	
 
 	//@ public normal_behavior
-	//@ requires b != 0;
-	//@ ensures \result == a / b;
+		//@ requires b != 0;
+		//@ ensures \result == a / b;
 	//@ also compromised_behavior
-	//@ requires a < 0;
-	//@ alarms "negative" isNeg(a);
-	//@ action "negative" { System.out.println("negative was caught"); a = -a; }
-	//@ also exceptional_behavior
-	//@ signals (RuntimeException) isZero(b);
+		//@ requires a < 0;
+		//@ alarms "negative" isNeg(a);
+		//@ action "negative" { System.out.println("negative was caught"); a = -a; }
+		//@ also exceptional_behavior
+		//@ signals (RuntimeException) isZero(b);
 	//@ pure
 	public static double Div(double a, double b) {
 		if (b == 0) throw new RuntimeException();

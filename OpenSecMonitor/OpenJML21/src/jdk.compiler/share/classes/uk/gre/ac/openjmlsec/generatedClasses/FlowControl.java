@@ -93,18 +93,18 @@ also
   }
   
   public static void main(String[] args) {
+    LogIn("USER", 1234);
+    DoX("USER");
+    DoY("USER");
+    DoY("USER");
+    LogOut("USER");
+    LogOut("USER");
     LogIn("USER1", 1234);
-    DoX("USER2");
-    DoY("USER3");
-    DoY("USER4");
-    LogOut("USER5");
-    LogOut("USER6");
-    LogIn("USER7", 1234);
-    LogIn("USER8", 1234);
-    LogOut("USER9");
-    DoX("USER10");
-    LogIn("USER11", 1234);
-    DoY("USER12");
-    LogOut("USER13");
+    LogIn("USER1", 1234);
+    LogOut("USER1");
+    DoX("USER1");
+    LogIn("USER1", 1234);
+    DoY("USER1");
+    LogOut("USER1");
   }
 }

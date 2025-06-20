@@ -18,33 +18,31 @@ public class MalInput {
 			(pos == 0)?
 				"Some Good Input"
 			: (pos == 1)?
-				"Some BAd INPUT\0W"
+				"Some BAd INPUT\0W" // Null byte
 			: (pos == 2)?
-				"LONG ********************************************************* Input"
-			: null;
+				"LONG ********************************************************* Input" // Too long
+			: null; // Null
 	}
 	//@ normal_behavior
-	//@ requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input);
-	//@ also compromised_behavior
-	//@ requires Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input);
-	//@ alarms TOO_LONG_INPUT Attacks.IsTooLong(input);
-	//@ alarms MALFORMED_INPUT Attacks.IsMalformedInput(input);
-	/*@ action MALFORMED_INPUT {
-		Attacks.Log("Malformed input passed");
-		input = Attacks.RemoveMalformedCharacters(input);
-	}*/
-	/*@ action TOO_LONG_INPUT {
-		Attacks.Log("Too long input passed");
-		input = Attacks.CutInputLength(input);
-	};*/
+		//@ requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input);
 	//@ also exceptional_behavior
-	//@ requires input == null;
-	//@ signals (NullPointerException) input == null;
+		//@ requires input == null;
+		//@ signals (NullPointerException) input == null;
+	//@ also compromised_behavior
+		//@ requires Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input);
+		//@ alarms TOO_LONG_INPUT Attacks.IsTooLong(input);
+		//@ alarms MALFORMED_INPUT Attacks.IsMalformedInput(input);
+		/*@ action MALFORMED_INPUT {
+			Attacks.Log("Malformed input passed");
+			input = Attacks.RemoveMalformedCharacters(input);
+		}*/
+		/*@ action TOO_LONG_INPUT {
+			Attacks.Log("Too long input passed");
+			input = Attacks.CutInputLength(input);
+		};*/
 	//@ pure
 	public static void DoSomething(String input) {
-		if (input == null) {
-			throw new NullPointerException();
-		}
+		
 	}
 	
 
@@ -56,8 +54,8 @@ public class MalInput {
 	
 	private class Attacks {
 		//@ public normal_behavior
-		//@ requires input != null;
-		//@ ensures \result == !(\forall int j; 0<=j && j<input.length(); !String.charEqualsIgnoreCase(input.charAt(j), '\0'));
+			//@ requires input != null;
+			//@ ensures \result == !(\forall int j; 0<=j && j<input.length(); !String.charEqualsIgnoreCase(input.charAt(j), '\0'));
 		//@ pure
 		public static boolean IsMalformedInput(String input){
 			//No null bytes
@@ -65,8 +63,8 @@ public class MalInput {
 		}
 		
 		//@ public normal_behavior
-		//@ requires input != null;
-		//@ ensures \result == (input.length() > 32);
+			//@ requires input != null;
+			//@ ensures \result == (input.length() > 32);
 		//@ pure
 		public static boolean IsTooLong(String input) {
 			return input.length() > 32;
@@ -84,6 +82,4 @@ public class MalInput {
 			System.err.println("\n\n*************:" + msg + "\n");
 		}
 	}
-		
-		
 }
