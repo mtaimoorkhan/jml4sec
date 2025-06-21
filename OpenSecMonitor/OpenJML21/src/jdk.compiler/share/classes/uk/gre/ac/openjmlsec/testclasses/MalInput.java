@@ -21,6 +21,8 @@ public class MalInput {
 				"Some BAd INPUT\0W" // Null byte
 			: (pos == 2)?
 				"LONG ********************************************************* Input" // Too long
+			: (pos == 3)?
+				"LONG ***\0*****************************\0************************* And B\0d input" // Too long
 			: null; // Null
 	}
 	//@ normal_behavior
@@ -35,21 +37,21 @@ public class MalInput {
 		/*@ action MALFORMED_INPUT {
 			Attacks.Log("Malformed input passed");
 			input = Attacks.RemoveMalformedCharacters(input);
-		}*/
+		}*/	
 		/*@ action TOO_LONG_INPUT {
 			Attacks.Log("Too long input passed");
 			input = Attacks.CutInputLength(input);
 		};*/
 	//@ pure
-	public static void DoSomething(String input) {
+	public static void TaskWithInput(String input) {
 		
 	}
 	
 
 	
 	public static void main(String[] args) {
-		for (int i = 0; i < 4; i++)
-			DoSomething(GetInput(i));
+		for (int i = 0; i < 5; i++)
+			TaskWithInput(GetInput(i));
 	}
 	
 	private class Attacks {

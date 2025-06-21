@@ -44,7 +44,7 @@ public class FlowControl {
 	//@ also compromised_behavior
 		//@ requires FlowVar != 2;
 		//@ modifies FlowVar, System.out.outputText;
-		//@ alarms FLOW_BREAK FlowVar != 1 || FlowVar != 2;
+		//@ alarms FLOW_BREAK FlowVar != 2;
 		/*@ action FLOW_BREAK {
 			LogOut(user);
 			return;

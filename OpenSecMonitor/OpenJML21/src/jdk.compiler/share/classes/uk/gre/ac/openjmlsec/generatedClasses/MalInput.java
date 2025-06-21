@@ -6,7 +6,7 @@ package uk.gre.ac.openjmlsec.generatedClasses;
 public class MalInput {
   
   public static String GetInput(int pos) {
-    return (pos == 0) ? "Some Good Input" : (pos == 1) ? "Some BAd INPUT\u0000W" : (pos == 2) ? "LONG ********************************************************* Input" : null;
+    return (pos == 0) ? "Some Good Input" : (pos == 1) ? "Some BAd INPUT\u0000W" : (pos == 2) ? "LONG ********************************************************* Input" : (pos == 3) ? "LONG ***\u0000*****************************\u0000************************* And B\u0000d input" : null;
   }
     /*@
     normal_behavior
@@ -30,8 +30,8 @@ also
       }; 
    */
 
-  /*@ pure*/ public static void DoSomething(String input) {
-    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("uk.gre.ac.openjmlsec.testclasses.MalInput", "", "String", "DoSomething", new java.lang.Object[]{input})) {
+  /*@ pure*/ public static void TaskWithInput(String input) {
+    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("uk.gre.ac.openjmlsec.testclasses.MalInput", "", "String", "TaskWithInput", new java.lang.Object[]{input})) {
       if (input == null) {
         throw new NullPointerException();
       }
@@ -47,7 +47,7 @@ also
   }
   
   public static void main(String[] args) {
-    for (int i = 0; i < 4; i++) DoSomething(GetInput(i));
+    for (int i = 0; i < 5; i++) TaskWithInput(GetInput(i));
   }
   
   private class Attacks {

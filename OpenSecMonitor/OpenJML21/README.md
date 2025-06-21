@@ -5,7 +5,7 @@ This is a fork of the OpenJML tool with additions for run-time security.
 ## OpenJML Additions
 Additions to source files outside of "uk.re.ac.openjmlsec" are marked with the header `//ADD-OPENJMLSEC` and footer `//ADD-END` for easy searching and replacement
 
-Only the module jdk.compiler has been edited.
+Only the module jdk.compiler has been edited with the OpenJML-master repo.
 
 
 # Project set up
@@ -18,6 +18,9 @@ The root of the project setup should have the projects:
 - Solvers
 
 Each of these repos can be pulled / downloaded from [OpenJML's github](https://github.com/OpenJML)
+
+Please make sure all versions of each repos are for OpenJML version "21-0.8" as that is the current version our tool runs upon.
+The tool can be upgraded by copying all additions to the newer version, however due to OpenJML updating, I can not say if the additions will be stable in later releases.
 
 This project is located in OpenJML-master/OpenJML21 (and where all commands should be ran in)
 
