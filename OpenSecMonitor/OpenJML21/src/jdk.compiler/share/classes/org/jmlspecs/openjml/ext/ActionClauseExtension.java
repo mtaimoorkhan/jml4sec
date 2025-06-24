@@ -14,7 +14,9 @@ import com.sun.tools.javac.comp.AttrContext;
 import com.sun.tools.javac.comp.Env;
 import com.sun.tools.javac.comp.JmlAttr;
 import com.sun.tools.javac.parser.JmlParser;
+import com.sun.tools.javac.parser.Tokens.TokenKind;
 import com.sun.tools.javac.tree.JCTree;
+import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCModifiers;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
@@ -38,9 +40,18 @@ public class ActionClauseExtension extends JmlExtension {
             }
             int pp = parser.pos();
             init(parser);
-            
+
             parser.nextToken();
-            JCExpression a = parser.parseExpression();
+            
+            JCExpression alarms_id;
+            if (parser.token().kind == TokenKind.DEFAULT || parser.token().kind == TokenKind.NULL) {
+            	alarms_id = null;
+                parser.nextToken();
+            }
+            else {
+            	alarms_id = TreeMaker.instance(parser.context).Ident(parser.ident());
+            }
+            //JCExpression a = parser.parseExpression();
             
             //JCExpression e;
             //if (parser.token().kind == SEMI) {
@@ -55,18 +66,16 @@ public class ActionClauseExtension extends JmlExtension {
             //}
             
             boolean saved = parser.setInJmlDeclaration(true);
-            JCStatement s = parser.parseJavaStatement();
+            JCStatement statement = parser.parseJavaStatement();
             parser.setInJmlDeclaration(saved);
             
             // Ignore semi
             if (parser.token().kind == SEMI) {
                 parser.nextToken();
             }
-         
-           
 
             //return toP(parser.maker().at(pp).JmlMethodClauseAction(keyword, a, clauseType, e));
-            return toP(parser.maker().at(pp).JmlMethodClauseAction(keyword, a, clauseType, s));
+            return toP(parser.maker().at(pp).JmlMethodClauseAction(keyword, alarms_id, clauseType, statement));
 
         }
         

@@ -19,7 +19,6 @@ import org.jmlspecs.openjml.ext.TypeInitializerClauseExtension;
 import uk.gre.ac.openjmlsec.FilePaths;
 
 public class EscVerify {
-    
     /*
      * Verifies a function using EscRunner
      * 

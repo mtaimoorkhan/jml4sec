@@ -67,7 +67,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
         jml_maker = JmlTree.Maker.instance(context);
         
         //Testing
-        CompileTimeEscVerificationCodeGenerator.instance.init(context);
+        //CompileTimeEscVerificationCodeGenerator.instance.init(context);
     }
     
     /*
@@ -118,10 +118,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
         HashSet<Name> used_vairables = new HashSet<>();
         //*
         for (JmlSpecificationCase c: tree.cases) {
-            boolean reverse = c.token != null && (
-                c.token.keyword.equals("compromised_behavior")
-                //|| c.token.keyword.equals("exceptional_behavior")
-            );
+            boolean reverse = c.token != null && (c.token.keyword.equals("compromised_behavior")/*|| c.token.keyword.equals("exceptional_behavior")*/);
             
             for (JmlMethodClause clause: c.clauses) {
                 if (

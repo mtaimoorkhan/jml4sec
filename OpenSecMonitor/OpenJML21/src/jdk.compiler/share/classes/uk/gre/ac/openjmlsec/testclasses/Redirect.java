@@ -9,6 +9,7 @@ public class Redirect {
 		"https://www.ourwebsite.com/",
 		"https://www.ourwebsite.com/home",
 		"https://www.ourwebsite.com/hello",
+		"https://www.ourwebsite.com/sorry",
 		"https://www.ourwebsite.com/somethingelse",
 		//.....
 		"https://www.google.com/",
@@ -28,7 +29,7 @@ public class Redirect {
 		/*@ action INVALID_URL {
 			System.err.println("Bad URL: " + url); 
 			//Redirect to home
-			url = "https://www.ourwebsite.com/home";
+			url = "https://www.ourwebsite.com/sorry";
 		}*/
 		//@ modifies System.out.outputText;
 	public void DoRedirect(String url) {

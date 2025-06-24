@@ -16,6 +16,7 @@ import com.sun.tools.javac.parser.JmlParser;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCModifiers;
+import com.sun.tools.javac.tree.TreeMaker;
 
 public class AlarmsClauseExtension extends JmlExtension {
     
@@ -38,15 +39,20 @@ public class AlarmsClauseExtension extends JmlExtension {
             init(parser);
             
             parser.nextToken();
-            JCExpression a = parser.parseExpression();
+
+            //EDIT
+            JCExpression alarms_id = TreeMaker.instance(parser.context).Ident(parser.ident());
+            //parser.nextToken();
+            //OLD:
+            //JCExpression a = parser.parseExpression();
             
-            JCExpression e;
+            JCExpression expression;
             if (parser.token().kind == SEMI) {
-                e = toP(parser.maker().at(parser.pos()).Literal(TypeTag.BOOLEAN, 1)); // Boolean.TRUE));
+            	expression = toP(parser.maker().at(parser.pos()).Literal(TypeTag.BOOLEAN, 1)); // Boolean.TRUE));
                 parser.nextToken();
             } else {
-                e = parser.parseExpression();
-                if (parser.token().kind != SEMI && e.getKind() != Kind.ERRONEOUS) {
+            	expression = parser.parseExpression();
+                if (parser.token().kind != SEMI && expression.getKind() != Kind.ERRONEOUS) {
                     parser.syntaxError(parser.pos(), null, "jml.missing.semi");
                     parser.skipThroughSemi();
                 }
@@ -56,7 +62,7 @@ public class AlarmsClauseExtension extends JmlExtension {
             parser.nextToken();
            
 
-            return toP(parser.maker().at(pp).JmlMethodClauseAlarms(keyword, a, clauseType, e));
+            return toP(parser.maker().at(pp).JmlMethodClauseAlarms(keyword, alarms_id, clauseType, expression));
 
         }
         

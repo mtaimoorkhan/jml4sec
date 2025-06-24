@@ -10,7 +10,7 @@ public class Redirect {
    */
   //@ static_initializer
 
-  static final String[] good_urls = {"https://www.ourwebsite.com/", "https://www.ourwebsite.com/home", "https://www.ourwebsite.com/hello", "https://www.ourwebsite.com/somethingelse", "https://www.google.com/"};
+  static final String[] good_urls = {"https://www.ourwebsite.com/", "https://www.ourwebsite.com/home", "https://www.ourwebsite.com/hello", "https://www.ourwebsite.com/sorry", "https://www.ourwebsite.com/somethingelse", "https://www.google.com/"};
     /*@
     normal_behavior
       requires url != null && good_urls != null; 
@@ -27,20 +27,21 @@ also
       alarms INVALID_URL !Arrays.stream(good_urls).anyMatch(url::equals); 
       action INVALID_URL {
         System.err.println("Bad URL: " + url);
-        url = "https://www.ourwebsite.com/home";
+        url = "https://www.ourwebsite.com/sorry";
       }; 
       assignable System.out.outputText; 
    */
 
   public void DoRedirect(String url) {
     if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("uk.gre.ac.openjmlsec.testclasses.Redirect", "", "String", "DoRedirect", new java.lang.Object[]{url, good_urls})) {
-      if (url == null || good_urls == null) {
-        throw new NullPointerException();
-      }
+      boolean EscVerify_recovered = false;
+      if (url == null || good_urls == null) throw new NullPointerException();
       if (!Arrays.stream(good_urls).anyMatch(url::equals)) {
         System.err.println("Bad URL: " + url);
-        url = "https://www.ourwebsite.com/home";
+        url = "https://www.ourwebsite.com/sorry";
+        EscVerify_recovered = true;
       }
+      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
     }
     System.out.println("Redirecting too: " + url);
   }

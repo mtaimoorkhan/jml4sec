@@ -10,7 +10,7 @@ public class Marshal {
 		//@ requires value_arg < 0 || value_arg > 10000;
 		//@ alarms NEGATIVE_VALUE value_arg < 0;
 		//@ action NEGATIVE_VALUE value_arg = 0;
-		//@ alarms TOO_BIG value_arg < 0;
+		//@ alarms TOO_BIG value_arg > 10000;
 		//@ action TOO_BIG value_arg = 10000;
 		//@ modifies value;
 	public void setValue(int value_arg) {

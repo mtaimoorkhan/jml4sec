@@ -22,12 +22,15 @@ import org.jmlspecs.openjml.Utils;
 
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCBinary;
+import com.sun.tools.javac.tree.JCTree.JCBlock;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCIdent;
 import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
+import com.sun.tools.javac.tree.JCTree.JCModifiers;
 import com.sun.tools.javac.tree.JCTree.JCNewArray;
 import com.sun.tools.javac.tree.JCTree.JCStatement;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
+import com.sun.tools.javac.tree.JCTree.Tag;
 import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.List;
@@ -107,6 +110,13 @@ public class CompileTimeEscVerificationCodeGenerator
         java.util.HashMap<String, ArrayList<JCStatement>> action_calls = new HashMap<>();
         java.util.HashMap<String, ArrayList<JCExpression>> signals_calls = new HashMap<>();
         ArrayList<String[]> order = new ArrayList<>();
+        var run_time_throw = maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString("java.lang.RuntimeException")),  List.nil(), null));
+        
+        JCIdent recovered_ident = maker.Ident(symbolsTable.fromString("EscVerify_recovered"));
+        
+        ArrayList<JCExpression> default_alarms = new ArrayList<>();
+        default_alarms.add(maker.Unary(Tag.NOT, recovered_ident));
+        alarms_calls.put(null, default_alarms);
         
     	for (JmlSpecificationCase specCase : tree.cases) {
             //JCTree.JCExpression prev_expr = null;
@@ -135,7 +145,7 @@ public class CompileTimeEscVerificationCodeGenerator
                     
                 } else if (clauseName.equalsIgnoreCase(ActionClauseExtension.actionID)) {
                     JmlMethodClauseAction action_clause = (JmlMethodClauseAction) clause;
-                	String key = action_clause.actionType.toString();
+                	String key = (action_clause.actionType == null)? null: action_clause.actionType.toString();
                 	if (!action_calls.containsKey(key)) {
                 		action_calls.put(key, new ArrayList<>());
                 	}
@@ -149,10 +159,18 @@ public class CompileTimeEscVerificationCodeGenerator
                 }
             }
         }
-    	
+    	order.add(new String[] {"alarms", null});
+        
     	//Add code
         java.util.List<JCStatement> statements = new ArrayList<>();
-        var run_time_throw = maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString("java.lang.RuntimeException")),  List.nil(), null));
+        statements.add(maker.VarDef(
+    		maker.Modifiers(0),
+    		recovered_ident.name,
+    		maker.Ident(symbolsTable.fromString("boolean")),
+    		maker.Ident(symbolsTable.fromString("false"))
+        ));
+        
+        var recovered = maker.Exec(maker.Assign(recovered_ident, maker.Ident(symbolsTable.fromString("true"))));
         
         for (String[] keys: order) {
     		String key = keys[1];
@@ -162,8 +180,15 @@ public class CompileTimeEscVerificationCodeGenerator
         		java.util.List<JCStatement> action_statements = new ArrayList<>();
             	if (action_calls.containsKey(key)) {
             		for (JCStatement expr: action_calls.get(key)) {
-            			action_statements.add(expr);
+            			if (expr.getTag() == Tag.BLOCK) {
+            				JCTree.JCBlock block = (JCBlock) expr;
+            				action_statements.addAll(block.stats);
+            			}
+            			else {
+            				action_statements.add(expr);
+            			}
             		}
+        			if (key != null) action_statements.add(recovered);
             	} else {
             		action_statements.add(run_time_throw);
             	}
@@ -182,7 +207,7 @@ public class CompileTimeEscVerificationCodeGenerator
         	
         	//Signals
         	else if (keys[0].equals("signals")){
-                JCStatement code = maker.Block(0L, List.of(maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString(key)), List.nil(), null))));
+                JCStatement code = maker.Throw(maker.NewClass(null, null, maker.Ident(symbolsTable.fromString(key)), List.nil(), null));
                 
             	JCExpression expression = signals_calls.get(key).get(0);
             	for (int i = 1; i < signals_calls.get(key).size(); i++) {
@@ -191,11 +216,6 @@ public class CompileTimeEscVerificationCodeGenerator
                 
                 statements.add(maker.If(expression, code, null));
         	}
-        }
-        
-        //If there were not specs, just throw an error
-        if (statements.isEmpty()) {
-            statements.add(run_time_throw);
         }
         
         return statements;
@@ -281,7 +301,7 @@ public class CompileTimeEscVerificationCodeGenerator
            GetNames(expr.rhs, list);
        } else if (expr_base instanceof JCTree.JCMethodInvocation) {
            JCTree.JCMethodInvocation expr = (JCTree.JCMethodInvocation) expr_base;
-           GetNames(expr.meth, list);
+           //GetNames(expr.meth, list);
            for (JCTree.JCExpression arg: expr.args)
                GetNames(arg, list);
         } else if (expr_base instanceof JCTree.JCParens) {
