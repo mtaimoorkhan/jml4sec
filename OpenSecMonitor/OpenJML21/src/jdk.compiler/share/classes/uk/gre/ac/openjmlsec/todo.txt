@@ -1,10 +1,6 @@
 Getting it working in eclipse
 
 
-Methods mods doo not print correctly in pretty.java 
+Methods mods do not print correctly
 
 Fix also / mutiple case statements output in JmlPretty.java
-
-pre clause -> (used varibles / needed varibles) -.> "uses A, my_array, ..." || "needs A, my_array, ..."
-
-better recovery

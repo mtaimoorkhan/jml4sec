@@ -42,9 +42,9 @@ public class EscVerify {
 	        
 	        String classLocation = className.replaceAll("\\.", "/");
 	        Path classFilePath = Paths.get(FilePaths.SOURCE_FOLDER + classLocation+ ".java").toAbsolutePath();
-	
+	        
 	        Path sourceFilePath = null;
-	
+	        
 	        try {
 	        	//Parse file
 	            API api = Factory.makeAPIImpl();

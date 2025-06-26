@@ -1,61 +1,43 @@
 package uk.gre.ac.openjmlsec.testclasses;
 
-public class Spam implements Runnable{
+public class Spam{
 
-	static int num_pings = 0;
-	static int MAX_PINGS = 2;
+	static final long BLOCK_OUT = 10L; //<< this has to be big in testing because Z3 is slow
+	long last_call = 0;
+	long prev_call = BLOCK_OUT + 1;
 	
 	//@ private normal_behavior
-		//@ requires num_pings >= 0 && num_pings < MAX_PINGS;
-		//@ modifies num_pings;
+		//@ requires prev_call > BLOCK_OUT + last_call;
+		//@ modifies prev_call, last_call, System.time, System.nexttime;
 	//@ private compromised_behavior
-		//@ requires num_pings >= MAX_PINGS;
-		//@ modifies num_pings;
-		//@ alarms SPAM num_pings >= MAX_PINGS;
-		//@ action SPAM {System.err.println("Too many pings, aborting"); return;};
+		//@ requires prev_call <= BLOCK_OUT + last_call;
+		//@ modifies prev_call, last_call, System.time, System.nexttime;
+		//@ alarms SPAM prev_call <= BLOCK_OUT + last_call;
+		/*@ action SPAM {
+			System.err.println("Too many pings within time frame, aborting");
+			prev_call = System.currentTimeMillis() / 1000l;
+			return;
+		};*/
 	
 	void Ping() {
-		num_pings += 1;
+		last_call = prev_call;
+		prev_call = System.currentTimeMillis() / 1000l;
+		
 		//Simulate something happening...
 		try {
-			Thread.sleep(40000);
+			Thread.sleep(10);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		num_pings -= 1;
 	}
-
-    public void run() {
-    	Ping();
-    }
 	
     public static void main(String[] args) {
     	Spam spam = new Spam();
-		//*
-	    try {
-	    	//Send requests
-			new Thread(spam).start();
-			Thread.sleep(3000);
-			new Thread(spam).start();
-		    Thread.sleep(3000);
-			new Thread(spam).start();
-		    Thread.sleep(3000);
-			new Thread(spam).start();
-		    Thread.sleep(3000);
-			new Thread(spam).start();
-		    Thread.sleep(3000);
-			new Thread(spam).start();
-		    Thread.sleep(3000);
-			new Thread(spam).start();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/*/
     	spam.Ping();
     	spam.Ping();
     	spam.Ping();
     	spam.Ping();
-    	//*/
+    	spam.Ping();
+    	spam.Ping();
     }
 }

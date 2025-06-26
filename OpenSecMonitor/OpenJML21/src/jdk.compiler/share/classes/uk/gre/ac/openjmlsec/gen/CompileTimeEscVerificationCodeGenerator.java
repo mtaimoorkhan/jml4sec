@@ -188,7 +188,7 @@ public class CompileTimeEscVerificationCodeGenerator
             				action_statements.add(expr);
             			}
             		}
-        			if (key != null) action_statements.add(recovered);
+        			if (key != null && (action_statements.isEmpty() || action_statements.getLast().getTag() != Tag.RETURN)) action_statements.add(recovered);
             	} else {
             		action_statements.add(run_time_throw);
             	}
