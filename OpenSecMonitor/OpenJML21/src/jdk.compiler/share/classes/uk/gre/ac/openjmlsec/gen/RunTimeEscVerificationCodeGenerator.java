@@ -1,6 +1,7 @@
 package uk.gre.ac.openjmlsec.gen;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.jmlspecs.openjml.JmlTree;
@@ -177,7 +178,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
         
         int j = 0;
         for (Name name: used_vairables) {
-        	AddAssume(maker.Ident(name), params[tree.decl.params.size() + j], body);
+        	AddAssume(maker.Ident(name), params[tree.decl.params.size() + j], body, new HashMap<Object, JCTree.JCExpression>());
             j++;
         }
         //*/
@@ -187,7 +188,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
         java.util.List<JCExpression> arguments = new ArrayList<>();
         for (int i = 0; i < tree.decl.params.size(); i++) {
         	String type_hint = tree.decl.params.get(i).getType().toString();
-        	JCTree.JCExpression expr = GetArgument(params[i], type_hint, body);
+        	JCTree.JCExpression expr = GetArgument(params[i], type_hint, body, new HashMap<Object, JCTree.JCExpression>());
             arguments.add(expr);
         }
         
@@ -231,7 +232,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
      * Returns:
      * 		A JCExpression representing as close as possible the object.
      */
-    public JCTree.JCExpression GetArgument(Object object, String type_hint, java.util.List<JCStatement> body){
+    public JCTree.JCExpression GetArgument(Object object, String type_hint, java.util.List<JCStatement> body, HashMap<Object, JCTree.JCExpression> seen){
     	//Null
     	if (object == null) {
     		return maker.Ident(symbolTable.fromString("null"));
@@ -296,7 +297,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
             ArrayList<JCTree.JCExpression> elems = new ArrayList<>();
             JCIdent type = maker.Ident(symbolTable.fromString(type_name));
             for (Object elem: list) {
-                elems.add(GetArgument(elem, type_name, body));
+                elems.add(GetArgument(elem, type_name, body, seen));
             }
             return maker.NewArray(type, List.nil(), List.from(elems));
         
@@ -308,7 +309,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
     		owner.defs = owner.defs.append(
     			maker.VarDef(maker.Modifiers(Flags.STATIC), symbolTable.fromString(name), maker.Ident(symbolTable.fromString(type_hint)), null)
     		);
-    		AddAssume(expr, object, body);
+    		AddAssume(expr, object, body, seen);
     		
     		return expr;
     	}
@@ -325,7 +326,7 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
      *		body: List<JCStatement>
      * 			A list of statements used to add assumes for complex types.
      */
-    public void AddAssume(JCTree.JCExpression left, Object object, java.util.List<JCStatement> body) {
+    public void AddAssume(JCTree.JCExpression left, Object object, java.util.List<JCStatement> body, HashMap<Object, JCTree.JCExpression> seen) {
     	if (object == null){
     		//assume left == null;
             body.add(jml_maker.JmlExpressionStatement(
@@ -386,26 +387,34 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
                 maker.Binary(Tag.NE, left, maker.Ident(symbolTable.fromString("null")))
             ));
     		//assume left.length == object.length;
-    		AddAssume(maker.Select(left, symbolTable.fromString("length")), value.length, body);
+    		AddAssume(maker.Select(left, symbolTable.fromString("length")), value.length, body, seen);
     		for (int i = 0; i < value.length; i++) {
         		//assume left[i] == object[i];
-    			AddAssume(maker.Indexed(left, maker.Literal(i)), value[i], body);
+    			AddAssume(maker.Indexed(left, maker.Literal(i)), value[i], body, seen);
     		}
     		
     	} else { // Has to be some instance (I hope)
-    		try {
+    		if (seen.containsKey(object)) {
+    			body.add(jml_maker.JmlExpressionStatement(
+                    StatementExprExtensions.assumeID, StatementExprExtensions.assumeClause, Label.EXPLICIT_ASSUME,
+                    maker.Binary(Tag.EQ, left, seen.get(object))
+                ));
+    		}
+    		else try {
     			body.add(jml_maker.JmlExpressionStatement(
                     StatementExprExtensions.assumeID, StatementExprExtensions.assumeClause, Label.EXPLICIT_ASSUME,
                     maker.Binary(Tag.NE, left, maker.Ident(symbolTable.fromString("null")))
                 ));
+    			seen.put(object, left);
+    			
     			//System.out.println("FEILDS:" + object.getClass().getDeclaredFields().length);
 				for (var field : object.getClass().getDeclaredFields()) {
 				    field.setAccessible(true); // You might want to set modifier to public first.
-				    Object value = field.get(object); 
+				    Object value = field.get(object);
 				    if (value != null) {
 				        //System.out.println(field.getType() + " " + field.getName() + "=" + value);
 				    	//assume left.feild == value;
-				    	AddAssume(maker.Select(left, symbolTable.fromString(field.getName())), value, body);
+				    	AddAssume(maker.Select(left, symbolTable.fromString(field.getName())), value, body, seen);
 				    }
 				}
 			} catch (SecurityException | IllegalArgumentException | IllegalAccessException e) {

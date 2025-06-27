@@ -16,9 +16,10 @@ import org.jmlspecs.openjml.ext.SingletonExpressions;
 import org.jmlspecs.openjml.ext.TypeExprClauseExtension;
 import org.jmlspecs.openjml.ext.TypeInitializerClauseExtension;
 
-import uk.gre.ac.openjmlsec.FilePaths;
-
 public class EscVerify {
+    static private String LOG_FILE = System.getProperty("OpenJMLSec_LogFile");
+    static private String SOURCE_FOLDER = (System.getProperty("OpenJMLSec_SourceFolder") == null)? "./": System.getProperty("OpenJMLSec_SourceFolder");
+    
     /*
      * Verifies a function using EscRunner
      * 
@@ -41,7 +42,13 @@ public class EscVerify {
 	        boolean success = false;
 	        
 	        String classLocation = className.replaceAll("\\.", "/");
-	        Path classFilePath = Paths.get(FilePaths.SOURCE_FOLDER + classLocation+ ".java").toAbsolutePath();
+	        Path classFilePath = Paths.get(SOURCE_FOLDER).resolve(classLocation+ ".java").toAbsolutePath();
+	        
+	        //File does not exist
+	        if (!classFilePath.toFile().isFile()) {
+	        	Log("Source file path does not exist: " + classFilePath);
+	        	return false;
+	        }
 	        
 	        Path sourceFilePath = null;
 	        
@@ -61,12 +68,13 @@ public class EscVerify {
 	            
 	            //Write file
 	            Files.write(sourceFilePath, unit.toString().getBytes(), StandardOpenOption.WRITE);
-	            System.out.println(unit.toString());
+	            //System.out.println(unit.toString());
 	            
 	            //Run esc
 	            java.util.List<String> output = new ArrayList<>();
 	            success = EscRunner.runEsc(sourceFilePath.toString(), methodName+",test_"+methodName, output);
-	            output.stream().forEach(System.out::println);
+	            
+	            output.stream().forEach(EscVerify::Log);
 	        } catch (Exception th) {
 	        	//Any errors
 	            th.printStackTrace();
@@ -84,6 +92,20 @@ public class EscVerify {
 	        return success;
         }
     }
+    
+    public static void Log(String line) {
+    	try {
+    		if (LOG_FILE == null) throw new IOException("OpenJMLSec_LogFile parameter not passed");
+			Files.writeString(
+			    Path.of(LOG_FILE),
+			    System.lineSeparator() + line.strip(),
+			    StandardOpenOption.CREATE, StandardOpenOption.APPEND
+			);
+		} catch (IOException e) {
+			if (LOG_FILE != null) System.err.println("Could not write to log file: " + LOG_FILE + ", reason:" + e);
+			System.err.println(line.strip());
+		}
+}
     
 	/*
 	 * Problem with initialization where subclasses of IJmlClauseKind do not put their keys into the map

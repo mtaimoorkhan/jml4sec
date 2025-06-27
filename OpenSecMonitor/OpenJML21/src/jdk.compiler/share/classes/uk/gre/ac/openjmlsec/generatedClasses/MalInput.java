@@ -32,17 +32,19 @@ also
 
   /*@ pure*/ public static void TaskWithInput(String input) {
     if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("uk.gre.ac.openjmlsec.testclasses.MalInput", "", "String", "TaskWithInput", new java.lang.Object[]{input})) {
-      if (input == null) {
-        throw new NullPointerException();
-      }
+      boolean EscVerify_recovered = false;
+      if (input == null) throw new NullPointerException();
       if (Attacks.IsTooLong(input)) {
         Attacks.Log("Too long input passed");
         input = Attacks.CutInputLength(input);
+        EscVerify_recovered = true;
       }
       if (Attacks.IsMalformedInput(input)) {
         Attacks.Log("Malformed input passed");
         input = Attacks.RemoveMalformedCharacters(input);
+        EscVerify_recovered = true;
       }
+      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
     }
   }
   

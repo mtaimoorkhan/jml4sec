@@ -11,8 +11,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import uk.gre.ac.openjmlsec.FilePaths;
-
 //import uk.gre.ac.openjmlsec.JML4Sec;
 
 
@@ -32,13 +30,19 @@ public class EscRunner {
      * Returns:
      * 		if verify was a success
      */
+    static private String OPENJML_PATH = (System.getProperty("OpenJMLSec_openjml") == null)? "openjml": System.getProperty("OpenJMLSec_openjml");
+
+    static public String SMALL_BREAK = "-";
+    static public String BREAK = "=";
+    static public int BREAK_LENGTH = 30;
+    
     public static boolean runEsc(String filePath, String methodName, List<String> output) {
         boolean success = false;
         int exitCode = 0;
         ProcessBuilder builder = new ProcessBuilder();
         
         String command =
-    		new File(FilePaths.OPENJML_PATH).getAbsolutePath()
+    		new File(OPENJML_PATH).getAbsolutePath()
     		+ " -classpath \"" + System.getProperty("java.class.path") + "\""
     		// For testing
     		+ " --specs-path /home/workvm/Documents/Work21/Specs/specs"
@@ -86,8 +90,10 @@ public class EscRunner {
             }
             
         }
+        output.add(SMALL_BREAK.repeat(BREAK_LENGTH));
         output.add("exitCode: " + exitCode);
         output.add("Success: " + success);
+        output.add(BREAK.repeat(BREAK_LENGTH));
         
         //For testing, if console log got too long
         //JML4Sec.writeFile("/mnt/java/output.txt", output_string);
