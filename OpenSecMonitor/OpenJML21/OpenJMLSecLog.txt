@@ -1,0 +1,81 @@
+
+------------------------------
+exitCode: 0
+Success: true
+==============================
+Failed to check esc. (error code: 6)
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:74: verify: The prover cannot establish an assertion (Precondition: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:33:) in method test_TaskWithInput
+TaskWithInput("Some BAd INPUT\u0000W");
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:33: verify: Associated declaration: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:74:
+/*@ pure*/ public static void TaskWithInput(String input) {
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:13: verify: Precondition conjunct is false: !Attacks.IsMalformedInput(input)
+requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input);
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:16: verify: Precondition conjunct is false: input == null
+requires input == null;
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_4798693030472357920.java:20: verify: Precondition conjunct is false: !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input))
+requires !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input));
+^
+5 verification failures
+------------------------------
+exitCode: 6
+Success: false
+==============================
+Failed to check esc. (error code: 6)
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:74: verify: The prover cannot establish an assertion (Precondition: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:33:) in method test_TaskWithInput
+TaskWithInput("LONG ********************************************************* Input");
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:33: verify: Associated declaration: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:74:
+/*@ pure*/ public static void TaskWithInput(String input) {
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:13: verify: Precondition conjunct is false: !Attacks.IsTooLong(input)
+requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input);
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:16: verify: Precondition conjunct is false: input == null
+requires input == null;
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_406252485403986137.java:20: verify: Precondition conjunct is false: !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input))
+requires !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input));
+^
+5 verification failures
+------------------------------
+exitCode: 6
+Success: false
+==============================
+Failed to check esc. (error code: 6)
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:74: verify: The prover cannot establish an assertion (Precondition: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:33:) in method test_TaskWithInput
+TaskWithInput("LONG ***\u0000*****************************\u0000************************* And B\u0000d input");
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:33: verify: Associated declaration: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:74:
+/*@ pure*/ public static void TaskWithInput(String input) {
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:13: verify: Precondition conjunct is false: !Attacks.IsTooLong(input)
+requires input != null && !Attacks.IsTooLong(input) && !Attacks.IsMalformedInput(input);
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:16: verify: Precondition conjunct is false: input == null
+requires input == null;
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_5052972099599984802.java:20: verify: Precondition conjunct is false: !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input))
+requires !(Attacks.IsTooLong(input) || Attacks.IsMalformedInput(input));
+^
+5 verification failures
+------------------------------
+exitCode: 6
+Success: false
+==============================
+Failed to check esc. (error code: 6)
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_17814417871875368635.java:74: verify: The prover cannot establish an assertion (NullFormal: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_17814417871875368635.java:33:) in method test_TaskWithInput: input in TaskWithInput(String)
+TaskWithInput(null);
+^
+/home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_17814417871875368635.java:33: verify: Associated declaration: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/Test_17814417871875368635.java:74:
+/*@ pure*/ public static void TaskWithInput(String input) {
+^
+2 verification failures
+------------------------------
+exitCode: 6
+Success: false
+==============================
+Source file path does not exist: /home/workvm/Documents/Work21/OpenJML-master/OpenJML21/./src/jdk.compiler/share/classes/uk/gre/ac/openjmlsec/testclasses/MalInput.java

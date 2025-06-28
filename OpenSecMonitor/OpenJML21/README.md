@@ -3,7 +3,7 @@
 This is a fork of the OpenJML tool with additions for run-time security.
 
 ## OpenJML Additions
-Additions to source files outside of "uk.re.ac.openjmlsec" are marked with the header `//ADD-OPENJMLSEC` and footer `//ADD-END` for easy searching and replacement
+Additions to source files outside of "uk.gre.ac.openjmlsec" are marked with the header `//ADD-OPENJMLSEC` and footer `//ADD-END` for easy searching and replacement
 
 Only the module jdk.compiler has been edited with the OpenJML-master repo.
 
@@ -31,29 +31,44 @@ Instead, the command line is used to run classes.
 
 ## Building OpenJML
 The building process is the same as OpenJml, see [building OpenJML](https://github.com/OpenJML/OpenJML/wiki/Building-OpenJML) for the process on that.
-Building OpenJML is required to run JML4SEC and the generated class (any any-time changes are made to classes)
+Building OpenJML is required to run JML4SEC, you will also need to make a release.
+You then can use this release copy (located in "release-temp") to run our tool.
+
+## Generating files
+
+### Copy files
+The files:
+- `EscRunner.java`
+- `EscVerify.java`
+- `RunTimeEscVerificationCodeGenerator.java`
+
+Must be copied into the project that you wish to run under the package `uk.gre.ac.openjmlsec.gen`.
+
+### Running JML4SEC
+
+The `openjml` command can be used to run our tool.
+The command line looks like this:
+`./openjml --JML4SEC /PATH/TO/SOURCE/FILE.java /PATH/TO/OUTPUT/FOLDER/`
+
+Where `/PATH/TO/SOURCE/FILE.java` is the source file you wish to generate a new source for, witch will be created in `/PATH/TO/OUTPUT/FOLDER/` with the same filename.
 
 ## Running files
-The command `./openjml-run` is used to run this file.
+The command `./openjml-run` is used to run this file, however the files must be build before, this can be done by eclipse or at the command line.
 The command line arguments for running in the development environment Specs can be passed by `-Dopenjml.eclipseSpecsProjectLocation=` `/PATH/TO/PROJECT/Specs`
 
 The parameters for our tool are:
-- `-DOpenJMLSec_LogFile=` the location to a file for OpenJML output to be put into at run-time, default is null and outputs to STDERR.
-- `-OpenJMLSec_SourceFolder=` the location to the source folder of the project, default is "./".
-- `-OpenJMLSec_openjml=` the location to the openjml bash script, default is "openjml".
+- `-DOpenJMLSec_LogFile=` the location to a file for OpenJML output to be put into at run-time, default is `null` and outputs to `System.err`.
+- `-OpenJMLSec_SourceFolder=` the location to the source folder of the project, default is `"./"`.
+- `-OpenJMLSec_openjml=` the location to the openjml bash script, default is `"openjml"`.
 
-Class path arguments are `-classpath /PATH/TO/PROJECT/OpenJML-master/OpenJML21/bin:/PATH/TO/PROJECT/OpenJML-master/OpenJML21/gson-2.8.1.jar`
 
-### Running JML4SEC.java
-Pass a valid path to a file and an output folder as two command line arguments:  `uk.gre.ac.openjmlsec.JML4Sec FILENAME.java OUTPUT_FOLDER`
+# Classes
 
-### JML4SEC test script
-An automated script for testing "JML4SEC" can be used to build and run the file.
-It takes the name of the file (without .java ext): `./JML4SEC FILENAME`
+There are example classes located in the `Classes` folder.
+To run the examples, copy a built release of OpenJML to The root of the project, and run commands within the release folder.
 
-### GEN test script
-An automated script for testing "GEN" can be used to build and run a generated file from JML4SEC file.
-It takes the name of the file (without .java ext): `./GEN FILENAME`
+Example command line:
 
-*note: both test scripts are dependent on how the project was set up, so they may not work if you edit the project set up*
+`./openjml --JML4SEC ../src/testclasses/MalInput.java ../src/generatedClasses`
 
+`./openjml-run -DOpenJMLSec_openjml=./openjml -DOpenJMLSec_LogFile=./OpenJMLSECLog.txt -DOpenJMLSec_SourceFolder=../src -classpath ../bin generatedClasses.MalInput`

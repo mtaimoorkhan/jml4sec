@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Set;
 
 import javax.tools.DiagnosticListener;
 import javax.tools.JavaFileManager;
@@ -307,6 +309,10 @@ public class Main extends com.sun.tools.javac.main.Main {
         		e.printStackTrace(System.out);
         		System.exit(3);
         	}
+        //ADD-OPENJMLSEC(Wyatt)
+        } else if (args.length > 0 && Set.of("-JML4SEC", "--JML4SEC", "-J4S", "--J4S", "-OPENJMLSEC", "--OPENJMLSEC").contains(args[0].toUpperCase())) {
+        	uk.gre.ac.openjmlsec.JML4Sec.main(Arrays.copyOfRange(args, 1, args.length));
+        //ADD-END
         } else {
             System.exit(execute(args, false));  // The boolean: true - errors to stdErr, false - errors to stdOut
         }

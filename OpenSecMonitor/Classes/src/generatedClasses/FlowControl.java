@@ -1,0 +1,117 @@
+package generatedClasses;
+
+//@ model import org.jmlspecs.lang.*;
+
+public class FlowControl {
+  /*@ ghost*/ static int FlowVar = 0;
+    /*@
+    normal_behavior
+      requires FlowVar == 0; 
+      ensures FlowVar == 1; 
+      assignable FlowVar, System.out.outputText; 
+also
+    compromised_behavior
+      requires FlowVar != 0; 
+      assignable FlowVar, System.out.outputText; 
+      alarms ALREADY_LOGGED_IN FlowVar != 0; 
+      action ALREADY_LOGGED_IN return;; 
+   */
+
+  public static void LogIn(String user, int data) {
+    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.FlowControl", "", "String,int", "LogIn", new java.lang.Object[]{user, data, FlowVar})) {
+      boolean EscVerify_recovered = false;
+      if (FlowVar != 0) return;
+      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
+    }
+    FlowVar = 1;
+    System.out.println("\n\n\n\n\n\n LogIn " + user + "\n\n\n\n\n\n");
+  }
+    /*@
+    normal_behavior
+      requires FlowVar == 1; 
+      ensures FlowVar == 2; 
+      assignable FlowVar, System.out.outputText; 
+also
+    compromised_behavior
+      requires FlowVar != 1; 
+      assignable FlowVar, System.out.outputText; 
+      alarms AT_Y FlowVar == 2; 
+      action AT_Y {
+        FlowVar = 1;
+      }; 
+      alarms FLOW_BREAK FlowVar != 1; 
+      action FLOW_BREAK {
+        LogOut(user);
+        return;
+      }; 
+   */
+
+  public static void DoX(String user) {
+    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.FlowControl", "", "String", "DoX", new java.lang.Object[]{user, FlowVar})) {
+      boolean EscVerify_recovered = false;
+      if (FlowVar == 2) {
+        FlowVar = 1;
+        EscVerify_recovered = true;
+      }
+      if (FlowVar != 1) {
+        LogOut(user);
+        return;
+      }
+      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
+    }
+    System.out.println("\n\n\n\n\n\n DoX " + user + "\n\n\n\n\n\n");
+    FlowVar = 2;
+  }
+    /*@
+    normal_behavior
+      requires FlowVar == 2; 
+      assignable FlowVar, System.out.outputText; 
+also
+    compromised_behavior
+      requires FlowVar != 2; 
+      assignable FlowVar, System.out.outputText; 
+      alarms FLOW_BREAK FlowVar != 2; 
+      action FLOW_BREAK {
+        LogOut(user);
+        return;
+      }; 
+   */
+
+  public static void DoY(String user) {
+    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.FlowControl", "", "String", "DoY", new java.lang.Object[]{user, FlowVar})) {
+      boolean EscVerify_recovered = false;
+      if (FlowVar != 2) {
+        LogOut(user);
+        return;
+      }
+      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
+    }
+    System.out.println("\n\n\n\n\n\n DoY " + user + "\n\n\n\n\n\n");
+  }
+    /*@
+    normal_behavior
+      ensures FlowVar == 0; 
+      assignable FlowVar; 
+   */
+
+  public static void LogOut(String user) {
+    System.out.println("\n\n\n\n\n\n LogOut " + user + "\n\n\n\n\n\n");
+    FlowVar = 0;
+  }
+  
+  public static void main(String[] args) {
+    LogIn("USER", 1234);
+    DoX("USER");
+    DoY("USER");
+    DoY("USER");
+    LogOut("USER");
+    LogOut("USER");
+    LogIn("USER1", 1234);
+    LogIn("USER1", 1234);
+    LogOut("USER1");
+    DoX("USER1");
+    LogIn("USER1", 1234);
+    DoY("USER1");
+    LogOut("USER1");
+  }
+}

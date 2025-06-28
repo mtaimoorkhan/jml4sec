@@ -155,7 +155,7 @@ public class CompileTimeEscVerificationCodeGenerator
                 		|| clauseName.equalsIgnoreCase(MethodExprClauseExtensions.requiresID)
                 ) {
                 	JmlMethodClauseExpr expr = (JmlMethodClauseExpr) clause;
-                    GetNames(expr.expression, used_variables);
+                    RunTimeEscVerificationCodeGenerator.GetNames(expr.expression, used_variables);
                 }
             }
         }
@@ -277,64 +277,5 @@ public class CompileTimeEscVerificationCodeGenerator
             maker.Unary(JCTree.Tag.NOT, methodInvocation),
             maker.Block(0L, List.from(statements)), null
        );
-    }
-    
-    /*
-     * Finds all JCIdent names within an expression
-     * 
-     * Parameters:
-     * 		expr_base: JCExpression
-     * 			the expression to search
-     * 		list: HashSet<Name>
-     * 			The set to add names too
-     */
-    public static void GetNames(JCTree.JCExpression expr_base, HashSet<Name> list){
-       if (expr_base == null || list == null) return;
-       
-       if (expr_base instanceof JCTree.JCIdent) {
-    	   Name name = ((JCIdent) expr_base).name;
-    	   if (name.toString() != "null")
-    		   list.add(name);
-       } else if (expr_base instanceof JCTree.JCBinary) {
-           JCTree.JCBinary expr = (JCTree.JCBinary) expr_base;
-           GetNames(expr.lhs, list);
-           GetNames(expr.rhs, list);
-       } else if (expr_base instanceof JCTree.JCMethodInvocation) {
-           JCTree.JCMethodInvocation expr = (JCTree.JCMethodInvocation) expr_base;
-           //GetNames(expr.meth, list);
-           for (JCTree.JCExpression arg: expr.args)
-               GetNames(arg, list);
-        } else if (expr_base instanceof JCTree.JCParens) {
-            JCTree.JCParens expr = (JCTree.JCParens) expr_base;
-            GetNames(expr.expr, list);
-        } else if (expr_base instanceof JCTree.JCUnary) {
-            JCTree.JCUnary expr = (JCTree.JCUnary) expr_base;
-            GetNames(expr.arg, list);
-        } else if (expr_base instanceof JCTree.JCArrayAccess) {
-            JCTree.JCArrayAccess expr = (JCTree.JCArrayAccess) expr_base;
-            GetNames(expr.index, list);
-            GetNames(expr.indexed, list);
-        } else if (expr_base instanceof JCTree.JCTypeCast) {
-            JCTree.JCTypeCast expr = (JCTree.JCTypeCast) expr_base;
-            GetNames(expr.expr, list);
-            
-        } else if (expr_base instanceof JCTree.JCFieldAccess) {
-        	JCTree.JCFieldAccess expr = (JCTree.JCFieldAccess) expr_base;
-        	/*HashSet<Name> names = new HashSet<>();
-            GetNames(expr.selected, names);
-            for (var name: names) {
-            	list.add(name.append('.', expr.name));
-            }*/
-        } else if (expr_base instanceof JmlTree.JmlChained) {
-            JmlTree.JmlChained expr = (JmlTree.JmlChained) expr_base;
-            for (JCBinary c: expr.conjuncts) GetNames(c, list);
-        } else if (!(
-            expr_base instanceof JCTree.JCLiteral
-            || expr_base instanceof JmlTree.JmlSingleton
-            || expr_base instanceof JCTree.JCErroneous
-            || expr_base instanceof JmlTree.JmlQuantifiedExpr
-        )) {
-            System.err.println("Unknown JCExpression: " + expr_base.getClass() +"\nPlease add code for it @"+Thread.currentThread().getStackTrace()[1]);
-        }
     }
 }
