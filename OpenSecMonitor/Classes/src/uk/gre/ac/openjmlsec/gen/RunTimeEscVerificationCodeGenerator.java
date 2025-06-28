@@ -100,9 +100,8 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
         owner = prev;
         subclasses = old;
         
-        //Replace name
-        if (owner == null) // Root class
-        	that.name = symbolTable.fromString(newMainClass);
+        //Replace name of Root class
+        if (owner == null) that.name = symbolTable.fromString(newMainClass);
     }
     
     /*
@@ -307,9 +306,9 @@ public class RunTimeEscVerificationCodeGenerator extends JmlTreeScanner {
     		// A class was passed
     		String name = "__esc_verify_temp_class" + (esc_verify_temp_class++) + "__";
     		var expr = maker.Ident(symbolTable.fromString(name));
-    		owner.defs = owner.defs.append(
-    			maker.VarDef(maker.Modifiers(Flags.STATIC), symbolTable.fromString(name), maker.Ident(symbolTable.fromString(type_hint)), null)
-    		);
+    		var type_ident = maker.Ident(symbolTable.fromString(type_hint));
+    		visitIdent(type_ident);
+    		owner.defs = owner.defs.append(maker.VarDef(maker.Modifiers(Flags.STATIC), expr.name, type_ident, null));
     		AddAssume(expr, object, body, seen);
     		
     		return expr;

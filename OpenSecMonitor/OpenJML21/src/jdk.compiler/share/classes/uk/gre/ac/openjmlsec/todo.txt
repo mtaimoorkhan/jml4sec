@@ -3,5 +3,3 @@ Getting it working in eclipse
 Methods mods do not print correctly
 
 Fix also / mutiple case statements output in JmlPretty.java
-
-Fix refrance to root class clausing problems when doing relfection
