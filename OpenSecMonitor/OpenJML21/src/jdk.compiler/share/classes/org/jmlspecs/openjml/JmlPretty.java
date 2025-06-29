@@ -1372,7 +1372,49 @@ public class JmlPretty extends Pretty implements IJmlVisitor {
         if (that.name == that.name.table.names.init &&
                 sourceOutput) sourceOutput = false;
 
-        visitMethodDef(that);
+        //ADD-OPENJMLSEC(Wyatt)
+        try {
+            println(); align();
+            printDocComment(that);
+            visitModifiers(that.mods);
+            //printExpr(that.mods);
+            printTypeParameters(that.typarams);
+            if (that.name == that.name.table.names.init) {
+                print(that.name);
+            } else {
+                printExpr(that.restype);
+                print(' ');
+                print(that.name);
+            }
+            print('(');
+            if (that.recvparam!=null) {
+                printExpr(that.recvparam);
+                if (that.params.size() > 0) {
+                    print(", ");
+                }
+            }
+            printExprs(that.params);
+            print(')');
+            if (that.thrown.nonEmpty()) {
+                print(" throws ");
+                printExprs(that.thrown);
+            }
+            if (that.defaultValue != null) {
+                print(" default ");
+                printExpr(that.defaultValue);
+            }
+            if (that.body != null) {
+                print(' ');
+                printStat(that.body);
+            } else {
+                print(';');
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        //ADD-END
+        //visitMethodDef(that);
+        
         sourceOutput = wasSourceOutput;
     }
     
@@ -1494,9 +1536,13 @@ public class JmlPretty extends Pretty implements IJmlVisitor {
         try {
             printAnnotations(that.annotations);
         	StringBuilder sb = new StringBuilder();
+        	boolean no_model = true;
     		for (var kk: ((JmlModifiers)that).jmlmods) {
     			//ADD-OPENJMLSEC(Wyatt)-RUN
-    			if (useJMLComments && ((that.flags & (1<<16)) == 0))
+    			if ((useJMLComments && no_model) && kk.toString() == "model") {
+    				print("//@ " + kk.toString());
+    				no_model = false;
+    			} else if ((useJMLComments && no_model) && ((that.flags & (1<<16)) == 0))
     				print("/*@ " + kk.toString() + "*" + "/");
     			else
                 //ADD-END*/
