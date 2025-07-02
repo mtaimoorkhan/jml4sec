@@ -61,6 +61,9 @@ The parameters for our tool are:
 - `-OpenJMLSec_SourceFolder=` the location to the source folder of the project, default is `"./"`.
 - `-OpenJMLSec_openjml=` the location to the openjml bash script, default is `"openjml"`.
 
+Additionally, the compiled versions of initial source of the files must be on the class path or their specification must be place within the `specs` folder.
+The reason for this is when looking for external classes (such as packages or modules), OpenJML will attempt to initially look within the `specs` folder to find the specifications for this external class.
+If this fails, it will then look on the `classpath` for this file and any OpenJML comments within that class.
 
 # Classes
 
@@ -72,3 +75,4 @@ Example command line:
 `./openjml --JML4SEC ../src/testclasses/MalInput.java ../src/generatedClasses`
 
 `./openjml-run -DOpenJMLSec_openjml=./openjml -DOpenJMLSec_LogFile=./OpenJMLSECLog.txt -DOpenJMLSec_SourceFolder=../src -classpath ../bin generatedClasses.MalInput`
+
