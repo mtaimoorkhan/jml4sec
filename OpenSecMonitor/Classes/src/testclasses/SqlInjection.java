@@ -14,7 +14,7 @@ public class SqlInjection {
 	//@ also private compromised_behavior
 		//@ requires an_agrument == null || Attacks.HasSQLInjection(an_agrument);
 		//@ alarms SQL_INJECTION Attacks.HasSQLInjection(an_agrument);
-		//@ action SQL_INJECTION Attacks.Log("An attempted SQL injection detected: " + an_agrument);
+		//@ action SQL_INJECTION {Attacks.Log("An attempted SQL injection detected: " + an_agrument);};
 	//@ pure // It probably wont be pure, but for this test case it is
 	private static boolean SomeSqlCall(int value, String an_agrument){
 		// Code calls a SQL lite or MySQL database

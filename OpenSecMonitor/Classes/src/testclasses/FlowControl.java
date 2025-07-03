@@ -11,7 +11,7 @@ public class FlowControl {
 		//@ requires FlowVar != 0;
 		//@ modifies FlowVar, System.out.outputText;
 		//@ alarms ALREADY_LOGGED_IN FlowVar != 0;
-		//@ action ALREADY_LOGGED_IN return;
+		//@ action ALREADY_LOGGED_IN {return;};
 	public static void LogIn(String user, int data) {
 		//@ set FlowVar = 1;
 		System.out.println("\n\n\n\n\n\n LogIn " + user + "\n\n\n\n\n\n");
@@ -27,12 +27,12 @@ public class FlowControl {
 		//@ alarms AT_Y FlowVar == 2;
 		/*@ action AT_Y {
 			FlowVar = 1;
-		}*/
+		};*/
 		//@ alarms FLOW_BREAK FlowVar != 1;
 		/*@ action FLOW_BREAK {
 			LogOut(user);
 			return;
-	}*/
+		};*/
 	public static void DoX(String user) {
 		System.out.println("\n\n\n\n\n\n DoX " + user + "\n\n\n\n\n\n");
 		//@ set FlowVar = 2;
@@ -48,7 +48,7 @@ public class FlowControl {
 		/*@ action FLOW_BREAK {
 			LogOut(user);
 			return;
-		}*/
+		};*/
 	public static void DoY(String user) {
 		System.out.println("\n\n\n\n\n\n DoY " + user + "\n\n\n\n\n\n");
 	}

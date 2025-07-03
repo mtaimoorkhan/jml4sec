@@ -30,7 +30,7 @@ public class Redirect {
 			System.err.println("Bad URL: " + url); 
 			//Redirect to home
 			url = "https://www.ourwebsite.com/sorry";
-		}*/
+		};*/
 		//@ modifies System.out.outputText;
 	public void DoRedirect(String url) {
 		//Do the redirect

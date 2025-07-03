@@ -12,7 +12,7 @@ public class CompTest {
 		/*@ action negative {
 			System.out.println("negative was caught");
 			a = -a;
-		}*/
+		};*/
 	//@ also exceptional_behavior
 		//@ requires isZero(b);
 		//@ signals_only RuntimeException;

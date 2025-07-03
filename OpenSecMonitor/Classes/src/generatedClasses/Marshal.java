@@ -1,9 +1,9 @@
-package generatedClasses;
+package testclasses;
 
 //@ model import org.jmlspecs.lang.*;
 
 public class Marshal {
-  int value;
+  /*@ spec_public*/ int value;
     /*@
     normal_behavior
       requires value_arg >= 0 && value_arg <= 10000; 
@@ -11,11 +11,15 @@ public class Marshal {
 also
     compromised_behavior
       requires value_arg < 0 || value_arg > 10000; 
-      alarms NEGATIVE_VALUE value_arg < 0; 
-      action NEGATIVE_VALUE value_arg = 0;; 
-      alarms TOO_BIG value_arg > 10000; 
-      action TOO_BIG value_arg = 10000;; 
       assignable value; 
+      alarms NEGATIVE_VALUE value_arg < 0; 
+      action NEGATIVE_VALUE {
+        value_arg = 0;
+      }; 
+      alarms TOO_BIG value_arg > 10000; 
+      action TOO_BIG {
+        value_arg = 10000;
+      }; 
    */
 
   public void setValue(int value_arg) {

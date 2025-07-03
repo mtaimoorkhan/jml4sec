@@ -1,4 +1,4 @@
-package generatedClasses;
+package testclasses;
 
 //@ model import org.jmlspecs.lang.*;
 
@@ -30,7 +30,7 @@ also
         a = -a;
         EscVerify_recovered = true;
       }
-      if (isZero(b)) throw new RuntimeException();
+      //if (isZero(b)) throw new RuntimeException();
       if (!EscVerify_recovered) throw new java.lang.RuntimeException();
     }
     if (b == 0) throw new RuntimeException();
@@ -46,9 +46,7 @@ also
       ensures \result == (b == 0); 
    */
 
-  /*@ pure*/ public static boolean isZero(double b) {
-    return b == 0;
-  }
+  //@ model pure public static boolean isZero(double b);
     /*@
       ensures \result == (a < 0); 
    */

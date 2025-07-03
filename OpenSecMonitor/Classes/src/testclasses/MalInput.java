@@ -37,7 +37,7 @@ public class MalInput {
 		/*@ action MALFORMED_INPUT {
 			Attacks.Log("Malformed input passed");
 			input = Attacks.RemoveMalformedCharacters(input);
-		}*/	
+		};*/	
 		/*@ action TOO_LONG_INPUT {
 			Attacks.Log("Too long input passed");
 			input = Attacks.CutInputLength(input);
