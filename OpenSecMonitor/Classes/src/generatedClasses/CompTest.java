@@ -1,4 +1,4 @@
-package testclasses;
+package generatedClasses;
 
 //@ model import org.jmlspecs.lang.*;
 

@@ -12,7 +12,7 @@ also
       requires x > y; 
       alarms OUT_OF_BOUNDS Math.abs(y) < Math.abs(x); 
       action OUT_OF_BOUNDS {
-        int temp = x;
+        var temp = x;
         x = y;
         y = temp;
       }; 
@@ -26,7 +26,7 @@ also
     if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.PaperExample", "", "int,int", "Foo", new java.lang.Object[]{x, y})) {
       boolean EscVerify_recovered = false;
       if (Math.abs(y) < Math.abs(x)) {
-        int temp = x;
+        var temp = x;
         x = y;
         y = temp;
         EscVerify_recovered = true;

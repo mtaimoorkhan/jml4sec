@@ -8,7 +8,7 @@ public class PaperExample {
 	//@     requires x > y;
 	//@     alarms OUT_OF_BOUNDS Math.abs(y) < Math.abs(x);
 	/*@     action OUT_OF_BOUNDS {
-	 			int temp = x;
+	 			var temp = x;
 	            x = y;
 	            y = temp;
 	        };*/

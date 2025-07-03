@@ -1,5 +1,0 @@
-Getting it working in eclipse
-
-Fix also / mutiple case statements output in JmlPretty.java
-
-"missing" in vardef printing -> var
