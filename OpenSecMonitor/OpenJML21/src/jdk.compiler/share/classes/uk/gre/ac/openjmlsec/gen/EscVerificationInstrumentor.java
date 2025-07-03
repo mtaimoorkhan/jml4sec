@@ -75,18 +75,23 @@ public class EscVerificationInstrumentor extends JmlTreeScanner {
         super.visitBlock(tree);
         
         ArrayList<JCStatement> statements = new ArrayList<>();
+        
 
         for (JCStatement stm: tree.stats) {
+            //System.out.println("STM: " + stm);
             //Find @set
-            if (stm instanceof JmlVariableDecl && ((JmlVariableDecl) stm).vartype.toString().equals("set")) {
+            if (stm instanceof JmlVariableDecl && ((JmlVariableDecl) stm).vartype != null && ((JmlVariableDecl) stm).vartype.toString().equals("set")) {
             	JmlVariableDecl jml_stm = (JmlVariableDecl) stm;
                 //Add its statement
             	var new_stm = maker.Assign(maker.Ident(jml_stm.name), jml_stm.init);
             	//maker.VarDef(maker.Modifiers(0), jml_stm.name, jml_stm.vartype, jml_stm.init);
                 statements.add(maker.Exec(new_stm));
+                
+                //System.out.println("FOUND SET");
             } else {
                 //Add others
                 statements.add(stm);
+                //System.out.println("NOPE");
             }
         }
         

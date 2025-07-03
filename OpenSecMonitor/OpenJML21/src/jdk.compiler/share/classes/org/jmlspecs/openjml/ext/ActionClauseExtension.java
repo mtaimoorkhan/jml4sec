@@ -65,9 +65,11 @@ public class ActionClauseExtension extends JmlExtension {
             //    }
             //}
             
-            boolean saved = parser.setInJmlDeclaration(true);
-            JCStatement statement = parser.parseJavaStatement();
-            parser.setInJmlDeclaration(saved);
+            //boolean saved = parser.setInJmlDeclaration(true);
+            parser.getScanner().setJml(false);
+            JCStatement statement = parser.block();
+            parser.getScanner().setJml(true);
+            //parser.setInJmlDeclaration(saved);
             
             // Ignore semi
             if (parser.token().kind == SEMI) {

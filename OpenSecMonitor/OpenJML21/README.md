@@ -75,4 +75,3 @@ Example command line:
 `./openjml --JML4SEC ../src/testclasses/MalInput.java ../src/generatedClasses`
 
 `./openjml-run -DOpenJMLSec_openjml=./openjml -DOpenJMLSec_LogFile=./OpenJMLSECLog.txt -DOpenJMLSec_SourceFolder=../src -classpath ../bin generatedClasses.MalInput`
-
