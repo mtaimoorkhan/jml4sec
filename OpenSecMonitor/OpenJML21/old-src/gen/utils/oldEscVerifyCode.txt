@@ -1,0 +1,116 @@
+
+        
+        /*public static JCTree.JCExpression getValue(Object value) {
+            if (value.getClass().isArray()){
+                java.util.List<Object> list = new ArrayList<>();
+                String type_name = "Object";
+                if (value instanceof int[]) {
+                    for (int v: (int[]) value) list.add(v);
+                    type_name = "int";
+                }
+                else if (value instanceof byte[]) {
+                    for (byte v: (byte[]) value) list.add(v);
+                    type_name = "byte";
+                }
+                else if (value instanceof short[]) {
+                    for (short v: (short[]) value) list.add(v);
+                    type_name = "short";
+                }
+                else if (value instanceof long[]) {
+                    for (long v: (long[]) value) list.add(v);
+                    type_name = "long";
+                }
+                else if (value instanceof float[]) {
+                    for (float v: (float[]) value) list.add(v);
+                    type_name = "float";
+                }
+                else if (value instanceof double[]) {
+                    for (double v: (double[]) value) list.add(v);
+                    type_name = "double";
+                }
+                else if (value instanceof boolean[]) {
+                    for (boolean v: (boolean[]) value) list.add(v);
+                    type_name = "boolean";
+                }
+                else if (value instanceof char[]) {
+                    for (char v: (char[]) value) list.add(v);
+                    type_name = "char";
+                }
+                JCIdent type = maker.Ident(symbolTable.fromString(type_name));
+                ArrayList<JCTree.JCExpression> elems = new ArrayList<>();
+                for (Object elem: list) {
+                    elems.add(getValue(elem, maker, symbolTable));
+                }
+                return maker.NewArray(type, List.nil(), List.from(elems));
+            }
+            else{
+                try{
+                    return maker.Literal(value);
+                } catch(AssertionError err) {
+                    System.err.println("getValue could not get value: " + value);
+                    return maker.Literal(TypeTag.CLASS, value);
+                }
+            }
+        }*/
+    }
+    /*
+
+    private static class SourceWriter {
+
+        private static final Pattern     SPEC_COMMENT_PATTERN = Pattern
+                .compile("/*@(.*?)\\* /", Pattern.DOTALL);
+
+        private final String             originalClassName;
+
+        private final JCTree.JCCompilationUnit unit;
+
+        public SourceWriter(String originalClassName, JCTree.JCCompilationUnit unit) {
+            this.originalClassName = originalClassName.substring(
+                    originalClassName.lastIndexOf(".") + 1,
+                    originalClassName.length());
+            this.unit = unit;
+        }
+
+        public Path writeSource() throws Exception {
+
+            Path tempFile = Files.createTempFile("Test_", ".java");
+
+            String code = replaceSpecificationNewLines(unit.toString());//JmlTree.toString(unit)
+            
+            //@todo replace by using above CodeGenerator to replace any instance of old class name with new
+            code = code.replaceAll(originalClassName, tempFile.getFileName().toString().replace(".java", ""));
+
+            System.out.println(code);
+
+            Files.write(tempFile, code.getBytes(), StandardOpenOption.WRITE);
+
+            return tempFile;
+        }
+
+        public static String replaceSpecificationNewLines(String text) {
+            // This does not work and causes problems, will fix later as not compulsory - Wyatt (ws3765c@gre.ac.uk)
+            /*Matcher matcher = SPEC_COMMENT_PATTERN.matcher(text);
+            if (matcher.find()) {
+                String matchedText = matcher.group(1);
+                String replacedText = matchedText.replace("\n", "\n@");
+                replacedText.replaceAll("\\s+", " ");
+                replacedText.replaceAll(matchedText, replacedText);
+                replacedText = replacedText.trim();
+                if(replacedText.lastIndexOf("@") == replacedText.length()-1) {
+                    replacedText = replacedText.substring(0, replacedText.lastIndexOf('@'));
+                }
+                replacedText = replacedText + "*/
+            /*";
+                text = matcher.replaceFirst(replacedText);
+            }* /
+            //Testing for ghost vars
+            //text = text.replaceFirst("private long ghost_x_val = 1;", "/*@ spec_public private ghost long ghost_x_val = 1;* /");
+            //text = text.replaceAll("\\\\result", "_JML__tmp4");
+            
+            //System.out.println("TEXT: " + '\\' + "result");
+            
+            return text;
+        }
+
+    }
+*/
