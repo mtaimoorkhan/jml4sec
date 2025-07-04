@@ -1,36 +1,35 @@
-package generatedClasses;
+package testclasses;
 
 //@ model import org.jmlspecs.lang.*;
-//@ model import java.lang.Math.*;
 
-public class PaperExample {
+public class Test_15352812224170754130 {
+    /*@
+      ensures \result >= 0; 
+   */
+
+  //@ model pure static int ABS(int x);
     /*@
     normal_behavior
-      requires Math.abs(y) >= Math.abs(x); 
+      requires ABS(y) >= ABS(x); 
+      ensures -1.0 <= \result && \result <= 1.0; 
 also
     compromised_behavior
-      requires Math.abs(y) < Math.abs(x); 
+      requires !(x > y); 
       alarms OUT_OF_BOUNDS Math.abs(y) < Math.abs(x); 
       action OUT_OF_BOUNDS {
         var temp = x;
         x = y;
         y = temp;
       }; 
+also
+    exceptional_behavior
+      requires y == 0; 
+      signals (RuntimeException) y == 0; 
    */
 
   /*@ pure*/ public static double Foo(int x, int y) {
-    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.PaperExample", "", "int,int", "Foo", new java.lang.Object[]{x, y})) {
-      boolean EscVerify_recovered = false;
-      if (Math.abs(y) < Math.abs(x)) {
-        var temp = x;
-        x = y;
-        y = temp;
-        EscVerify_recovered = true;
-      }
-      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
-    }
-    if (y == 0) return 0;
-    return x / (double)y;
+    if (y == 0) throw new RuntimeException();
+    return (double)x / (double)y;
   }
   
   public static void main(String[] args) {
@@ -43,5 +42,9 @@ also
     System.out.println(Foo(100, -10));
     System.out.println(Foo(-100, -10));
     System.out.println(Foo(0, 0));
+  }
+  
+  private void test_Foo() {
+    Foo(10, 100);
   }
 }

@@ -107,6 +107,9 @@ class ClassCollector extends JmlTreeScanner {
     
     @Override
     public void visitJmlVariableDecl(JmlVariableDecl tree) {
+    	//ADD-OPENJMLSEC(Wyatt)
+    	if (tree.sym != null)
+    	//ADD-END*/
         save(tree.sym.type);
         super.visitJmlVariableDecl(tree);
     }

@@ -1,16 +1,16 @@
-package generatedClasses;
+package testclasses;
 
 //@ model import org.jmlspecs.lang.*;
 //@ model import java.lang.Math.*;
 
-public class PaperExample {
+public class Test_10287611155860842372 {
     /*@
     normal_behavior
       requires Math.abs(y) >= Math.abs(x); 
 also
     compromised_behavior
-      requires Math.abs(y) < Math.abs(x); 
-      alarms OUT_OF_BOUNDS Math.abs(y) < Math.abs(x); 
+      requires !(x > y); 
+      alarms OUT_OF_BOUNDS x > y; 
       action OUT_OF_BOUNDS {
         var temp = x;
         x = y;
@@ -19,16 +19,6 @@ also
    */
 
   /*@ pure*/ public static double Foo(int x, int y) {
-    if (!uk.gre.ac.openjmlsec.gen.EscVerify.verify("testclasses.PaperExample", "", "int,int", "Foo", new java.lang.Object[]{x, y})) {
-      boolean EscVerify_recovered = false;
-      if (Math.abs(y) < Math.abs(x)) {
-        var temp = x;
-        x = y;
-        y = temp;
-        EscVerify_recovered = true;
-      }
-      if (!EscVerify_recovered) throw new java.lang.RuntimeException();
-    }
     if (y == 0) return 0;
     return x / (double)y;
   }
@@ -43,5 +33,9 @@ also
     System.out.println(Foo(100, -10));
     System.out.println(Foo(-100, -10));
     System.out.println(Foo(0, 0));
+  }
+  
+  private void test_Foo() {
+    Foo(10, -100);
   }
 }
