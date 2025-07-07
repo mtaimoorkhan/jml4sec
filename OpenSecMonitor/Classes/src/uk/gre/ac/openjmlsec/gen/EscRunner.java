@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -126,5 +129,20 @@ public class EscRunner {
                 e.printStackTrace();
             }
         }
+    }
+
+    static private String LOG_FILE = System.getProperty("OpenJMLSec_LogFile");
+    public static void Log(String line) {
+    	try {
+    		if (LOG_FILE == null) throw new IOException("OpenJMLSec_LogFile parameter not passed");
+			Files.writeString(
+			    Path.of(LOG_FILE),
+			    System.lineSeparator() + line.strip(),
+			    StandardOpenOption.CREATE, StandardOpenOption.APPEND
+			);
+		} catch (IOException e) {
+			if (LOG_FILE != null) System.err.println("Could not write to log file: " + LOG_FILE + ", reason:" + e);
+			System.err.println(line.strip());
+		}
     }
 }

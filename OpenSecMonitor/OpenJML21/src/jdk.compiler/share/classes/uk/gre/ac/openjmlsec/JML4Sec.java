@@ -58,7 +58,7 @@ public class JML4Sec {
         int errors = 0;
         String output_code = null;
         
-        //This causes some errors if not fully working, so is commented out when testing features
+        //For testing
         /*Do esc check on entire class
         System.out.println("Esc checking");
         ArrayList<String> output = new ArrayList<>();
